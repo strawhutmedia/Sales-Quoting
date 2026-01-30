@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embed Instructions — Straw Hut Quote Widget</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #1a1f3d; line-height: 1.6; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; }
+    h2 { font-size: 1.2rem; margin-top: 36px; margin-bottom: 12px; color: #2dd4a0; }
+    p { margin-bottom: 16px; color: #374151; }
+    .code-block { background: #1a1f3d; color: #e2e4e8; padding: 20px; border-radius: 12px; overflow-x: auto; margin-bottom: 24px; font-family: 'SF Mono', Monaco, 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; }
+    .code-block code { color: #e2e4e8; }
+    .highlight { color: #2dd4a0; }
+    .comment { color: #6b7280; }
+    .tag { color: #93c5fd; }
+    .attr { color: #fbbf24; }
+    .divider { border: none; border-top: 1px solid #e2e4e8; margin: 36px 0; }
+    .badge { display: inline-block; background: #2dd4a0; color: white; font-size: 0.75rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+<h1>Podcast Quote Widget — Embed Guide</h1>
+<p>Two ways to add the quote builder to the Straw Hut services page.</p>
+
+<hr class="divider">
+
+<h2>Option A: iframe Embed <span class="badge">Easiest</span></h2>
+<p>Host <code>embed.html</code> anywhere (GitHub Pages, your own server, CDN) and embed it with a single line. No conflicts with your existing site CSS or JS.</p>
+
+<div class="code-block"><code><span class="comment">&lt;!-- Straw Hut Podcast Quote Builder --&gt;</span>
+<span class="tag">&lt;iframe</span>
+  <span class="attr">src</span>=<span class="highlight">"https://strawhutmedia.github.io/Sales-Quoting/embed.html"</span>
+  <span class="attr">width</span>=<span class="highlight">"100%"</span>
+  <span class="attr">height</span>=<span class="highlight">"700"</span>
+  <span class="attr">frameborder</span>=<span class="highlight">"0"</span>
+  <span class="attr">style</span>=<span class="highlight">"border:none; max-width:600px; display:block; margin:0 auto;"</span>
+<span class="tag">&gt;&lt;/iframe&gt;</span></code></div>
+
+<p><strong>Note:</strong> Update the <code>src</code> URL to wherever you host <code>embed.html</code>. If using GitHub Pages, the URL will be <code>https://strawhutmedia.github.io/Sales-Quoting/embed.html</code></p>
+
+<hr class="divider">
+
+<h2>Option B: Direct Embed (Inline) <span class="badge">No iframe</span></h2>
+<p>Drop this directly into the services page HTML. The widget renders inline — no iframe needed. All styles are scoped to <code>#shm-quote-widget</code> so they won't conflict with the rest of the page.</p>
+
+<div class="code-block"><code><span class="comment">&lt;!-- Straw Hut Podcast Quote Builder — paste this where you want the widget --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="highlight">"shm-quote-widget"</span><span class="tag">&gt;&lt;/div&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="highlight">"https://strawhutmedia.github.io/Sales-Quoting/widget.js"</span><span class="tag">&gt;&lt;/script&gt;</span></code></div>
+
+<p>That's it — two lines. The script auto-initializes, injects its own scoped styles, and builds the entire widget inside the <code>div</code>.</p>
+
+<hr class="divider">
+
+<h2>Setup: Enable GitHub Pages (one-time)</h2>
+<p>To get the public URL for hosting, enable GitHub Pages on the repo:</p>
+<ol style="color:#374151; margin-bottom: 24px;">
+  <li>Go to <strong>github.com/strawhutmedia/Sales-Quoting</strong></li>
+  <li>Click <strong>Settings</strong> (top tab bar)</li>
+  <li>In the left sidebar, click <strong>Pages</strong></li>
+  <li>Under <strong>Source</strong>, select the branch: <code>claude/podcast-quote-widget-TNvH2</code> (or <code>main</code> after merge)</li>
+  <li>Set folder to <code>/ (root)</code></li>
+  <li>Click <strong>Save</strong></li>
+  <li>Wait 1–2 minutes. Your URL will be: <code>https://strawhutmedia.github.io/Sales-Quoting/</code></li>
+</ol>
+
+<hr class="divider">
+
+<h2>Files in this repo</h2>
+<table style="width:100%; border-collapse:collapse; margin-bottom:24px;">
+  <tr style="border-bottom:1px solid #e2e4e8;">
+    <td style="padding:8px 0;"><strong>index.html</strong></td>
+    <td style="padding:8px 0; color:#6b7280;">Full standalone page (dark background, logo, card) — preview URL</td>
+  </tr>
+  <tr style="border-bottom:1px solid #e2e4e8;">
+    <td style="padding:8px 0;"><strong>embed.html</strong></td>
+    <td style="padding:8px 0; color:#6b7280;">Transparent-background version for iframe embedding</td>
+  </tr>
+  <tr style="border-bottom:1px solid #e2e4e8;">
+    <td style="padding:8px 0;"><strong>widget.js</strong></td>
+    <td style="padding:8px 0; color:#6b7280;">Self-contained JS for direct inline embed (Option B)</td>
+  </tr>
+  <tr>
+    <td style="padding:8px 0;"><strong>EMBED-INSTRUCTIONS.html</strong></td>
+    <td style="padding:8px 0; color:#6b7280;">This file</td>
+  </tr>
+</table>
+
+</body>
+</html>

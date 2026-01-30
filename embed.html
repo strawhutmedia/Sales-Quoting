@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcast Quote Builder | Straw Hut Media</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!--
+  STRAW HUT MEDIA — Podcast Quote Builder Widget
+  This page is designed to be loaded inside an iframe.
+  See EMBED-INSTRUCTIONS.html for how to embed it.
+-->
+
+<div id="shm-quote-widget"></div>
+
+<script>
+/**
+ * Straw Hut Media — Podcast Quote Builder Widget
+ * Self-initializing, zero-dependency, fully self-contained.
+ */
+(function() {
+  var WIDGET_ID = 'shm-quote-widget';
+  var root = document.getElementById(WIDGET_ID);
+  if (!root) return;
+
+  // ── Inject scoped styles ──────────────────────────────────────
+  var style = document.createElement('style');
+  style.textContent = "\
+#shm-quote-widget{--shm-navy:#1a1f3d;--shm-navy-light:#252b52;--shm-green:#2dd4a0;--shm-green-hover:#25b888;--shm-green-soft:rgba(45,212,160,.1);--shm-white:#fff;--shm-g50:#f8f9fa;--shm-g100:#f0f1f3;--shm-g200:#e2e4e8;--shm-g400:#9ca3af;--shm-g500:#6b7280;--shm-g700:#374151;--shm-g800:#1f2937;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;width:100%;max-width:560px;margin:0 auto}\
+#shm-quote-widget *{box-sizing:border-box;margin:0;padding:0}\
+#shm-quote-widget .shm-card{background:var(--shm-white);border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.12);overflow:hidden}\
+#shm-quote-widget .shm-progress{height:4px;background:var(--shm-g100);width:100%}\
+#shm-quote-widget .shm-progress-fill{height:100%;background:var(--shm-green);transition:width .4s ease;border-radius:0 2px 2px 0}\
+#shm-quote-widget .shm-step{display:none;padding:40px 36px;animation:shmFadeIn .35s ease}\
+#shm-quote-widget .shm-step.active{display:block}\
+@keyframes shmFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}\
+#shm-quote-widget .shm-counter{font-size:.78rem;font-weight:600;color:var(--shm-green);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}\
+#shm-quote-widget .shm-step h2{font-size:1.5rem;font-weight:800;color:var(--shm-navy);line-height:1.3;margin-bottom:8px}\
+#shm-quote-widget .shm-subtitle{font-size:.92rem;color:var(--shm-g500);line-height:1.5;margin-bottom:28px}\
+#shm-quote-widget .shm-options{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}\
+#shm-quote-widget .shm-opt{display:flex;align-items:center;gap:16px;padding:18px 20px;border:2px solid var(--shm-g200);border-radius:12px;cursor:pointer;transition:all .2s}\
+#shm-quote-widget .shm-opt:hover,#shm-quote-widget .shm-opt.sel{border-color:var(--shm-green);background:var(--shm-green-soft)}\
+#shm-quote-widget .shm-icon{width:44px;height:44px;border-radius:10px;background:var(--shm-g50);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}\
+#shm-quote-widget .shm-opt.sel .shm-icon{background:var(--shm-green)}\
+#shm-quote-widget .shm-icon svg{width:22px;height:22px;stroke:var(--shm-g500);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}\
+#shm-quote-widget .shm-opt.sel .shm-icon svg{stroke:var(--shm-white)}\
+#shm-quote-widget .shm-txt{flex:1}\
+#shm-quote-widget .shm-label{font-size:.95rem;font-weight:600;color:var(--shm-navy);margin-bottom:2px}\
+#shm-quote-widget .shm-desc{font-size:.82rem;color:var(--shm-g500);line-height:1.4}\
+#shm-quote-widget .shm-chk{width:22px;height:22px;border:2px solid var(--shm-g200);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}\
+#shm-quote-widget .shm-opt.sel .shm-chk{background:var(--shm-green);border-color:var(--shm-green)}\
+#shm-quote-widget .shm-chk svg{width:12px;height:12px;fill:none;stroke:var(--shm-white);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .15s}\
+#shm-quote-widget .shm-opt.sel .shm-chk svg{opacity:1}\
+#shm-quote-widget .shm-multi .shm-chk{border-radius:6px}\
+#shm-quote-widget .shm-nav{display:flex;justify-content:space-between;align-items:center;gap:12px}\
+#shm-quote-widget .shm-btn{padding:14px 28px;border-radius:50px;font-size:.92rem;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:inherit}\
+#shm-quote-widget .shm-back{background:transparent;color:var(--shm-g500);padding:14px 20px}\
+#shm-quote-widget .shm-back:hover{color:var(--shm-navy)}\
+#shm-quote-widget .shm-next{background:var(--shm-green);color:var(--shm-white);margin-left:auto}\
+#shm-quote-widget .shm-next:hover{background:var(--shm-green-hover);transform:translateY(-1px)}\
+#shm-quote-widget .shm-next:disabled{background:var(--shm-g200);color:var(--shm-g400);cursor:not-allowed;transform:none}\
+#shm-quote-widget .shm-result-box{background:linear-gradient(135deg,var(--shm-navy),var(--shm-navy-light));border-radius:12px;padding:28px 24px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden}\
+#shm-quote-widget .shm-result-box::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(45,212,160,.1);border-radius:50%}\
+#shm-quote-widget .shm-badge{display:inline-block;background:var(--shm-green);color:var(--shm-white);font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}\
+#shm-quote-widget .shm-pkg-name{font-size:1.3rem;font-weight:800;color:var(--shm-white);margin-bottom:8px}\
+#shm-quote-widget .shm-price{font-size:2.4rem;font-weight:800;color:var(--shm-green);margin-bottom:4px}\
+#shm-quote-widget .shm-period{font-size:.82rem;color:var(--shm-g400)}\
+#shm-quote-widget .shm-features{margin-bottom:28px}\
+#shm-quote-widget .shm-features h4{font-size:.82rem;font-weight:700;color:var(--shm-g400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}\
+#shm-quote-widget .shm-feat{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:.88rem;color:var(--shm-g700)}\
+#shm-quote-widget .shm-feat-chk{width:18px;height:18px;background:var(--shm-green-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}\
+#shm-quote-widget .shm-feat-chk svg{width:10px;height:10px;fill:none;stroke:var(--shm-green);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}\
+#shm-quote-widget .shm-cta{display:block;width:100%;padding:16px;background:var(--shm-green);color:var(--shm-white);border:none;border-radius:50px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;text-align:center;margin-bottom:8px}\
+#shm-quote-widget .shm-cta:hover{background:var(--shm-green-hover);transform:translateY(-1px)}\
+#shm-quote-widget .shm-restart{display:block;width:100%;padding:12px;background:transparent;color:var(--shm-g500);border:none;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;text-align:center}\
+#shm-quote-widget .shm-restart:hover{color:var(--shm-navy)}\
+#shm-quote-widget .shm-footnote{text-align:center;font-size:.75rem;color:var(--shm-g400);margin-top:12px}\
+@media(max-width:600px){#shm-quote-widget .shm-step{padding:28px 24px}#shm-quote-widget .shm-step h2{font-size:1.3rem}#shm-quote-widget .shm-opt{padding:14px 16px;gap:12px}#shm-quote-widget .shm-icon{width:38px;height:38px}}\
+  ";
+  document.head.appendChild(style);
+
+  // ── Helpers ────────────────────────────────────────────────────
+  var CHK = '<svg viewBox="0 0 16 16"><polyline points="3.5 8 6.5 11 12.5 5"/></svg>';
+
+  function icon(svg) {
+    return '<div class="shm-icon">' + svg + '</div>';
+  }
+  function optHtml(value, iconSvg, label, desc) {
+    return '<div class="shm-opt" data-value="' + value + '">' +
+      icon(iconSvg) +
+      '<div class="shm-txt"><div class="shm-label">' + label + '</div><div class="shm-desc">' + desc + '</div></div>' +
+      '<div class="shm-chk">' + CHK + '</div></div>';
+  }
+
+  // ── SVG Icons ─────────────────────────────────────────────────
+  var ICONS = {
+    mic: '<svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>',
+    video: '<svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
+    monitor: '<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    home: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    pin: '<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+    music: '<svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+    star: '<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    image: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+    share: '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>',
+    calendar: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+    chart: '<svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+    no: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
+    social: '<svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>',
+    user: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    users: '<svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    shield: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+  };
+
+  // ── Steps Data ────────────────────────────────────────────────
+  var stepsData = [
+    {
+      key: 'podcastType', required: true, multi: false,
+      title: 'What type of podcast are you creating?',
+      subtitle: 'This helps us recommend the right production services for you.',
+      options: [
+        { value: 'audio', icon: 'mic', label: 'Audio Only', desc: 'Classic podcast format \u2014 polished audio delivered to all platforms' },
+        { value: 'video', icon: 'video', label: 'Audio + Video', desc: 'Full video production for YouTube, social media, and beyond' }
+      ]
+    },
+    {
+      key: 'recordingLocation', required: true, multi: false,
+      title: 'Where will you be recording?',
+      subtitle: 'Choose the recording setup that works best for your show.',
+      options: [
+        { value: 'virtual', icon: 'monitor', label: 'Virtual / Remote', desc: 'Record from anywhere with our remote setup support' },
+        { value: 'studio', icon: 'home', label: 'In Our Studio', desc: 'Record at our professional studio on Melrose Avenue' },
+        { value: 'on-location', icon: 'pin', label: 'On-Location', desc: 'We come to you \u2014 anywhere you need us to be' }
+      ]
+    },
+    {
+      key: 'productionLevel', required: true, multi: false,
+      title: 'What level of production do you need?',
+      subtitle: 'From essential editing to full sound design \u2014 pick your level.',
+      options: [
+        { value: 'basic', icon: 'music', label: 'Essential Production', desc: 'Professional audio editing, mastering, and custom intros/outros' },
+        { value: 'full', icon: 'star', label: 'Full Production + Sound Design', desc: 'Multi-track editing, sound design, and original theme music composed for your show' }
+      ]
+    },
+    {
+      key: 'branding', required: false, multi: true,
+      title: 'Do you need branding and distribution?',
+      subtitle: 'Select all that apply to your needs.',
+      options: [
+        { value: 'cover-art', icon: 'image', label: 'Custom Branding Package', desc: 'Professional cover art and logo designed for your show' },
+        { value: 'distribution', icon: 'share', label: 'Distribution to All Major Platforms', desc: 'Apple Podcasts, Spotify, Google, and more' },
+        { value: 'scheduling', icon: 'calendar', label: 'Weekly Publishing & Scheduling', desc: 'Consistent release schedule managed for you' },
+        { value: 'analytics', icon: 'chart', label: 'Analytics & Growth Tracking', desc: 'Monitor your performance and listener trends' }
+      ]
+    },
+    {
+      key: 'social', required: true, multi: false,
+      title: 'How about social media content?',
+      subtitle: 'Grow your audience with promotional content for each episode.',
+      options: [
+        { value: 'none', icon: 'no', label: 'No Social Media Content', desc: "I'll handle my own social media promotion" },
+        { value: 'basic-clip', icon: 'instagram', label: 'One Clip per Episode', desc: 'A custom social media clip to promote each episode' },
+        { value: 'full-social', icon: 'social', label: 'Full Social Media Package', desc: 'Clips, audiograms, graphics, trailers, and thumbnails' }
+      ]
+    },
+    {
+      key: 'management', required: true, multi: false,
+      title: 'Do you need production management?',
+      subtitle: 'Let our team handle the logistics so you can focus on content.',
+      options: [
+        { value: 'none', icon: 'user', label: 'Self-Managed', desc: "I'll coordinate production myself" },
+        { value: 'guest-booking', icon: 'users', label: 'Guest Booking & Scheduling', desc: 'We help find and schedule guests for your show' },
+        { value: 'full-management', icon: 'shield', label: 'Dedicated Manager + Priority Support', desc: 'A dedicated production manager and priority support for urgent needs' }
+      ]
+    }
+  ];
+
+  // ── Packages ──────────────────────────────────────────────────
+  var packages = {
+    essential: { name: 'Essential Podcast Package', price: 2450 },
+    premium:   { name: 'Premium Studio Podcast Package', price: 4350, badge: 'Most Popular' },
+    ultimate:  { name: 'Ultimate On-Location Podcast Package', price: 6550, badge: 'All-Inclusive' }
+  };
+
+  // ── State ─────────────────────────────────────────────────────
+  var answers = {};
+  var currentStep = 0;
+  var totalSteps = stepsData.length;
+
+  // ── Build HTML ────────────────────────────────────────────────
+  var html = '<div class="shm-card">';
+  html += '<div class="shm-progress"><div class="shm-progress-fill" id="shm-progress" style="width:' + (100 / totalSteps) + '%"></div></div>';
+
+  // Build each step
+  for (var i = 0; i < totalSteps; i++) {
+    var s = stepsData[i];
+    html += '<div class="shm-step' + (i === 0 ? ' active' : '') + '" data-step="' + i + '">';
+    html += '<div class="shm-counter">Step ' + (i + 1) + ' of ' + totalSteps + '</div>';
+    html += '<h2>' + s.title + '</h2>';
+    html += '<p class="shm-subtitle">' + s.subtitle + '</p>';
+    html += '<div class="shm-options' + (s.multi ? ' shm-multi' : '') + '" data-key="' + s.key + '">';
+    for (var j = 0; j < s.options.length; j++) {
+      var o = s.options[j];
+      html += optHtml(o.value, ICONS[o.icon], o.label, o.desc);
+    }
+    html += '</div>';
+    html += '<div class="shm-nav">';
+    if (i > 0) html += '<button class="shm-btn shm-back" data-go="' + (i - 1) + '">Back</button>';
+    else html += '<div></div>';
+    var nextLabel = (i === totalSteps - 1) ? 'See My Quote' : 'Continue';
+    html += '<button class="shm-btn shm-next" id="shm-next-' + i + '"' + (s.required ? ' disabled' : '') + '>' + nextLabel + '</button>';
+    html += '</div></div>';
+  }
+
+  // Result step
+  html += '<div class="shm-step" data-step="result">';
+  html += '<div class="shm-counter">Your Personalized Quote</div>';
+  html += '<h2>Here\'s your perfect package</h2>';
+  html += '<p class="shm-subtitle">Based on your selections, we recommend:</p>';
+  html += '<div class="shm-result-box">';
+  html += '<div class="shm-badge" id="shm-badge">Recommended</div>';
+  html += '<div class="shm-pkg-name" id="shm-pkg-name"></div>';
+  html += '<div class="shm-price" id="shm-pkg-price"></div>';
+  html += '<div class="shm-period">one-time setup</div>';
+  html += '</div>';
+  html += '<div class="shm-features"><h4>What\'s Included</h4><div id="shm-feat-list"></div></div>';
+  html += '<button class="shm-cta" id="shm-cta">Get Started Now</button>';
+  html += '<button class="shm-restart" id="shm-restart">Start Over</button>';
+  html += '<div class="shm-footnote">Final pricing confirmed after consultation</div>';
+  html += '</div>';
+
+  html += '</div>';
+  root.innerHTML = html;
+
+  // ── Wire up interactions ──────────────────────────────────────
+  var allSteps = root.querySelectorAll('.shm-step');
+  var progressBar = document.getElementById('shm-progress');
+
+  function goTo(step) {
+    currentStep = step;
+    for (var k = 0; k < allSteps.length; k++) allSteps[k].classList.remove('active');
+    if (step === 'result') {
+      root.querySelector('[data-step="result"]').classList.add('active');
+      progressBar.style.width = '100%';
+      showResult();
+    } else {
+      root.querySelector('[data-step="' + step + '"]').classList.add('active');
+      progressBar.style.width = ((step + 1) / totalSteps * 100) + '%';
+    }
+  }
+
+  // Option clicks
+  root.querySelectorAll('.shm-options').forEach(function(group) {
+    var key = group.getAttribute('data-key');
+    var isMulti = group.classList.contains('shm-multi');
+    group.querySelectorAll('.shm-opt').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        if (isMulti) {
+          opt.classList.toggle('sel');
+          var vals = [];
+          group.querySelectorAll('.shm-opt.sel').forEach(function(s) { vals.push(s.getAttribute('data-value')); });
+          answers[key] = vals;
+        } else {
+          group.querySelectorAll('.shm-opt').forEach(function(o) { o.classList.remove('sel'); });
+          opt.classList.add('sel');
+          answers[key] = opt.getAttribute('data-value');
+        }
+        updateButtons();
+      });
+    });
+  });
+
+  function updateButtons() {
+    for (var i = 0; i < totalSteps; i++) {
+      var btn = document.getElementById('shm-next-' + i);
+      var s = stepsData[i];
+      if (s.required) {
+        btn.disabled = !answers[s.key];
+      }
+    }
+  }
+
+  // Next buttons
+  for (var i = 0; i < totalSteps; i++) {
+    (function(idx) {
+      var btn = document.getElementById('shm-next-' + idx);
+      btn.addEventListener('click', function() {
+        if (btn.disabled) return;
+        goTo(idx === totalSteps - 1 ? 'result' : idx + 1);
+      });
+    })(i);
+  }
+
+  // Back buttons
+  root.querySelectorAll('.shm-back').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      goTo(parseInt(btn.getAttribute('data-go')));
+    });
+  });
+
+  // Recommendation logic
+  function getRecommendation() {
+    var score = 0;
+    if (answers.podcastType === 'video') score += 2;
+    if (answers.recordingLocation === 'studio') score += 1;
+    if (answers.recordingLocation === 'on-location') score += 3;
+    if (answers.productionLevel === 'full') score += 1;
+    if (answers.branding && answers.branding.length >= 3) score += 1;
+    if (answers.social === 'full-social') score += 2;
+    if (answers.management === 'guest-booking') score += 1;
+    if (answers.management === 'full-management') score += 2;
+    if (score >= 7) return 'ultimate';
+    if (score >= 3) return 'premium';
+    return 'essential';
+  }
+
+  function getFeatures() {
+    var f = [];
+    f.push('Professional audio editing and mastering');
+    if (answers.productionLevel === 'full') {
+      f.push('Multi-track editing and sound design');
+      f.push('Original theme music composed for your show');
+    }
+    f.push('Custom intros, outros, and transitions');
+    if (answers.podcastType === 'video') {
+      if (answers.recordingLocation === 'on-location') {
+        f.push('On-location video recording anywhere you need');
+        f.push('Multi-camera setup with 3\u20136 cameras');
+        f.push('Professional video editing and branding');
+        f.push('On-site producer to oversee the shoot');
+        f.push('All lighting, microphones, and camera equipment provided');
+        f.push('Videos optimized for YouTube and social media');
+      } else {
+        f.push('Video recording in our studio or virtual setup');
+        f.push('Multi-camera video setup');
+      }
+    }
+    if (answers.branding) {
+      if (answers.branding.indexOf('cover-art') !== -1) f.push('Custom branding package (cover art and logo)');
+      if (answers.branding.indexOf('distribution') !== -1) f.push('Distribution to all major platforms');
+      if (answers.branding.indexOf('scheduling') !== -1) f.push('Weekly publishing and scheduling');
+      if (answers.branding.indexOf('analytics') !== -1) f.push('Analytics and growth tracking');
+    }
+    if (answers.social === 'basic-clip') f.push('One custom social media clip per episode');
+    if (answers.social === 'full-social') {
+      f.push('Full social media content creation (clips, audiograms, graphics)');
+      f.push('Enhanced social assets including trailers and thumbnails');
+    }
+    if (answers.management === 'guest-booking') f.push('Guest booking and scheduling assistance');
+    if (answers.management === 'full-management') {
+      f.push('Dedicated production manager');
+      f.push('Priority support for urgent needs');
+      f.push('Guest booking and scheduling assistance');
+    }
+    return f;
+  }
+
+  function showResult() {
+    var key = getRecommendation();
+    var pkg = packages[key];
+    document.getElementById('shm-badge').textContent = pkg.badge || 'Recommended';
+    document.getElementById('shm-pkg-name').textContent = pkg.name;
+    document.getElementById('shm-pkg-price').textContent = '$' + pkg.price.toLocaleString();
+    var features = getFeatures();
+    var fhtml = '';
+    for (var i = 0; i < features.length; i++) {
+      fhtml += '<div class="shm-feat"><div class="shm-feat-chk">' + CHK + '</div><span>' + features[i] + '</span></div>';
+    }
+    document.getElementById('shm-feat-list').innerHTML = fhtml;
+    document.getElementById('shm-cta').onclick = function() {
+      window.open('https://services.strawhutmedia.com/', '_blank');
+    };
+  }
+
+  // Restart
+  document.getElementById('shm-restart').addEventListener('click', function() {
+    answers = {};
+    root.querySelectorAll('.shm-opt').forEach(function(o) { o.classList.remove('sel'); });
+    updateButtons();
+    goTo(0);
+  });
+
+  updateButtons();
+})();
+</script>
+
+</body>
+</html>
