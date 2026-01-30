@@ -41,6 +41,14 @@
     "#shm-quote-widget .shm-chk svg{width:12px;height:12px;fill:none;stroke:var(--shm-white);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .15s}",
     "#shm-quote-widget .shm-opt.sel .shm-chk svg{opacity:1}",
     "#shm-quote-widget .shm-multi .shm-chk{border-radius:6px}",
+    "#shm-quote-widget .shm-toggle-row{display:none;align-items:center;gap:12px;padding:16px 20px;margin-top:4px;border:2px solid var(--shm-g200);border-radius:12px;cursor:pointer;transition:all .2s}",
+    "#shm-quote-widget .shm-toggle-row.visible{display:flex}",
+    "#shm-quote-widget .shm-toggle-row:hover{border-color:var(--shm-green);background:var(--shm-green-soft)}",
+    "#shm-quote-widget .shm-toggle-row.sel{border-color:var(--shm-green);background:var(--shm-green-soft)}",
+    "#shm-quote-widget .shm-toggle-box{width:22px;height:22px;border:2px solid var(--shm-g200);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}",
+    "#shm-quote-widget .shm-toggle-row.sel .shm-toggle-box{background:var(--shm-green);border-color:var(--shm-green)}",
+    "#shm-quote-widget .shm-toggle-box svg{width:12px;height:12px;fill:none;stroke:var(--shm-white);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .15s}",
+    "#shm-quote-widget .shm-toggle-row.sel .shm-toggle-box svg{opacity:1}",
     "#shm-quote-widget .shm-nav{display:flex;justify-content:space-between;align-items:center;gap:12px}",
     "#shm-quote-widget .shm-btn{padding:14px 28px;border-radius:50px;font-size:.92rem;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:inherit}",
     "#shm-quote-widget .shm-back{background:transparent;color:var(--shm-g500);padding:14px 20px}",
@@ -71,9 +79,7 @@
   // ── Helpers ────────────────────────────────────────────────────
   var CHK = '<svg viewBox="0 0 16 16"><polyline points="3.5 8 6.5 11 12.5 5"/></svg>';
 
-  function iconWrap(svg) {
-    return '<div class="shm-icon">' + svg + '</div>';
-  }
+  function iconWrap(svg) { return '<div class="shm-icon">' + svg + '</div>'; }
   function optHtml(value, iconSvg, label, desc) {
     return '<div class="shm-opt" data-value="' + value + '">' +
       iconWrap(iconSvg) +
@@ -88,8 +94,6 @@
     monitor: '<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
     home: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
     pin: '<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
-    music: '<svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
-    star: '<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
     image: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
     share: '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>',
     calendar: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
@@ -97,9 +101,22 @@
     no: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>',
     instagram: '<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
     social: '<svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>',
+    grid: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+    layers: '<svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
     user: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
     users: '<svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-    shield: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+    group: '<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    userplus: '<svg viewBox="0 0 24 24"><path d="M15 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>',
+    scissors: '<svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>',
+    tool: '<svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+    shield: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    chat: '<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+    filetext: '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>',
+    edit: '<svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
+    repeat: '<svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>',
+    clock: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    hash: '<svg viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>',
+    send: '<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>'
   };
 
   // ── Steps Data ────────────────────────────────────────────────
@@ -107,10 +124,42 @@
     {
       key: 'podcastType', required: true, multi: false,
       title: 'What type of podcast are you creating?',
-      subtitle: 'This helps us recommend the right production services for you.',
+      subtitle: 'This helps us determine the right equipment and setup for your show.',
       options: [
-        { value: 'audio', icon: 'mic', label: 'Audio Only', desc: 'Classic podcast format \u2014 polished audio delivered to all platforms' },
+        { value: 'audio', icon: 'mic', label: 'Audio Only', desc: 'Classic podcast format \u2014 polished, professional audio delivered to all platforms' },
         { value: 'video', icon: 'video', label: 'Audio + Video', desc: 'Full video production for YouTube, social media, and beyond' }
+      ]
+    },
+    {
+      key: 'podcastStyle', required: true, multi: false,
+      title: 'What style is your podcast?',
+      subtitle: 'Different formats need different production approaches.',
+      options: [
+        { value: 'conversational', icon: 'chat', label: 'Conversational', desc: 'Interviews, co-hosted discussions, or casual conversations' },
+        { value: 'scripted', icon: 'filetext', label: 'Scripted / Journalistic', desc: 'Narrative storytelling, investigative reporting, or scripted episodes' },
+        { value: 'monologue', icon: 'edit', label: 'Essay / Monologue', desc: 'Solo commentary, thought leadership, or essay-style episodes' }
+      ]
+    },
+    {
+      key: 'micCount', required: true, multi: false,
+      title: 'How many people will be on mic?',
+      subtitle: 'This helps us plan the right number of microphones and cameras for your setup.',
+      options: [
+        { value: 'solo', icon: 'user', label: 'Just the Host', desc: 'Solo show \u2014 1 mic, 1 camera' },
+        { value: 'two', icon: 'users', label: 'Host + 1 Guest', desc: 'Interview or co-host format \u2014 2 mics, 2 cameras' },
+        { value: 'three', icon: 'group', label: 'Host + 2 Guests', desc: 'Panel or roundtable \u2014 3 mics, 3 cameras' },
+        { value: 'four-plus', icon: 'userplus', label: 'Host + 3 or More Guests', desc: 'Large panel \u2014 4+ mics, multi-camera setup' }
+      ]
+    },
+    {
+      key: 'frequency', required: true, multi: false,
+      title: 'How often will you release episodes?',
+      subtitle: 'This helps us scope the ongoing production workload.',
+      options: [
+        { value: 'weekly', icon: 'repeat', label: 'Weekly', desc: 'New episode every week \u2014 the standard for growing audiences' },
+        { value: 'every-other-week', icon: 'calendar', label: 'Every Other Week', desc: 'Bi-weekly release schedule' },
+        { value: 'monthly', icon: 'clock', label: 'Once a Month', desc: 'Monthly deep-dive episodes' },
+        { value: 'limited-run', icon: 'hash', label: 'Limited Run Series', desc: 'A set number of episodes (e.g. 6\u201312 episode season)' }
       ]
     },
     {
@@ -124,22 +173,13 @@
       ]
     },
     {
-      key: 'productionLevel', required: true, multi: false,
-      title: 'What level of production do you need?',
-      subtitle: 'From essential editing to full sound design \u2014 pick your level.',
-      options: [
-        { value: 'basic', icon: 'music', label: 'Essential Production', desc: 'Professional audio editing, mastering, and custom intros/outros' },
-        { value: 'full', icon: 'star', label: 'Full Production + Sound Design', desc: 'Multi-track editing, sound design, and original theme music composed for your show' }
-      ]
-    },
-    {
       key: 'branding', required: false, multi: true,
       title: 'Do you need branding and distribution?',
       subtitle: 'Select all that apply to your needs.',
       options: [
         { value: 'cover-art', icon: 'image', label: 'Custom Branding Package', desc: 'Professional cover art and logo designed for your show' },
         { value: 'distribution', icon: 'share', label: 'Distribution to All Major Platforms', desc: 'Apple Podcasts, Spotify, Google, and more' },
-        { value: 'scheduling', icon: 'calendar', label: 'Weekly Publishing & Scheduling', desc: 'Consistent release schedule managed for you' },
+        { value: 'scheduling', icon: 'calendar', label: 'Publishing & Scheduling', desc: 'Consistent release schedule managed for you' },
         { value: 'analytics', icon: 'chart', label: 'Analytics & Growth Tracking', desc: 'Monitor your performance and listener trends' }
       ]
     },
@@ -147,30 +187,43 @@
       key: 'social', required: true, multi: false,
       title: 'How about social media content?',
       subtitle: 'Grow your audience with promotional content for each episode.',
+      hasToggle: true,
+      toggleKey: 'socialManagement',
+      toggleLabel: 'Also manage our social media posting',
+      toggleDesc: 'We\u2019ll schedule and post content to your accounts \u2014 not just deliver the assets',
       options: [
         { value: 'none', icon: 'no', label: 'No Social Media Content', desc: "I'll handle my own social media promotion" },
-        { value: 'basic-clip', icon: 'instagram', label: 'One Clip per Episode', desc: 'A custom social media clip to promote each episode' },
-        { value: 'full-social', icon: 'social', label: 'Full Social Media Package', desc: 'Clips, audiograms, graphics, trailers, and thumbnails' }
+        { value: '1-asset', icon: 'instagram', label: '1 Asset per Episode', desc: 'One polished clip or graphic to promote each episode' },
+        { value: '3-assets', icon: 'grid', label: '3 Assets per Episode', desc: 'A mix of clips, audiograms, and graphics per episode' },
+        { value: '7-10-assets', icon: 'layers', label: '7\u201310 Assets per Episode', desc: 'Full content suite: clips, reels, carousels, audiograms, and graphics' }
       ]
     },
     {
-      key: 'management', required: true, multi: false,
-      title: 'Do you need production management?',
-      subtitle: 'Let our team handle the logistics so you can focus on content.',
+      key: 'serviceLevel', required: true, multi: false,
+      title: 'What level of service do you need?',
+      subtitle: 'Tell us how involved you want us to be in your production.',
       options: [
-        { value: 'none', icon: 'user', label: 'Self-Managed', desc: "I'll coordinate production myself" },
-        { value: 'guest-booking', icon: 'users', label: 'Guest Booking & Scheduling', desc: 'We help find and schedule guests for your show' },
-        { value: 'full-management', icon: 'shield', label: 'Dedicated Manager + Priority Support', desc: 'A dedicated production manager and priority support for urgent needs' }
+        { value: 'editing-only', icon: 'scissors', label: 'Editing Only', desc: 'You record, we edit \u2014 you get polished audio (and video) files back' },
+        { value: 'production-only', icon: 'tool', label: 'Production Only', desc: 'We handle recording and editing \u2014 you get the finished files to publish yourself' },
+        { value: 'full-service', icon: 'shield', label: 'Full Service \u2014 Done for You', desc: 'We handle everything: recording, editing, publishing, and promotion' }
       ]
     }
   ];
 
-  // ── Packages ──────────────────────────────────────────────────
-  var packages = {
-    essential: { name: 'Essential Podcast Package', price: 2450 },
-    premium:   { name: 'Premium Studio Podcast Package', price: 4350, badge: 'Most Popular' },
-    ultimate:  { name: 'Ultimate On-Location Podcast Package', price: 6550, badge: 'All-Inclusive' }
+  // ── Pricing ───────────────────────────────────────────────────
+  var BASE_PRICE = 1500;
+  var PRICING = {
+    format: { audio: 0, video: 800 },
+    podcastStyle: { conversational: 0, scripted: 400, monologue: 0 },
+    micCount: { solo: 0, two: 200, three: 400, 'four-plus': 700 },
+    frequency: { weekly: 0, 'every-other-week': -400, monthly: -600, 'limited-run': -200 },
+    location: { virtual: 0, studio: 400, 'on-location': 1200 },
+    branding: { 'cover-art': 400, distribution: 200, scheduling: 300, analytics: 200 },
+    social: { none: 0, '1-asset': 200, '3-assets': 500, '7-10-assets': 1000 },
+    socialManagement: 300,
+    serviceLevel: { 'editing-only': 0, 'production-only': 500, 'full-service': 1200 }
   };
+  var MIN_PRICE = 500;
 
   // ── State ─────────────────────────────────────────────────────
   var answers = {};
@@ -192,7 +245,15 @@
       var o = s.options[j];
       html += optHtml(o.value, ICONS[o.icon], o.label, o.desc);
     }
-    html += '</div><div class="shm-nav">';
+    html += '</div>';
+    // Toggle (for social management)
+    if (s.hasToggle) {
+      html += '<div class="shm-toggle-row" id="shm-toggle-' + s.toggleKey + '" data-toggle-key="' + s.toggleKey + '">';
+      html += '<div class="shm-toggle-box">' + CHK + '</div>';
+      html += '<div class="shm-txt"><div class="shm-label">' + s.toggleLabel + '</div><div class="shm-desc">' + s.toggleDesc + '</div></div>';
+      html += '</div>';
+    }
+    html += '<div class="shm-nav">';
     if (i > 0) html += '<button class="shm-btn shm-back" data-go="' + (i - 1) + '">Back</button>';
     else html += '<div></div>';
     html += '<button class="shm-btn shm-next" id="shm-next-' + i + '"' + (s.required ? ' disabled' : '') + '>' + (i === totalSteps - 1 ? 'See My Quote' : 'Continue') + '</button>';
@@ -201,14 +262,14 @@
 
   // Result step
   html += '<div class="shm-step" data-step="result">';
-  html += '<div class="shm-counter">Your Personalized Quote</div>';
-  html += '<h2>Here\'s your perfect package</h2>';
-  html += '<p class="shm-subtitle">Based on your selections, we recommend:</p>';
+  html += '<div class="shm-counter">Your Custom Quote</div>';
+  html += '<h2>Here\'s your personalized quote</h2>';
+  html += '<p class="shm-subtitle">Based on your selections, here\'s what we recommend:</p>';
   html += '<div class="shm-result-box">';
-  html += '<div class="shm-badge" id="shm-badge">Recommended</div>';
+  html += '<div class="shm-badge" id="shm-badge">Your Quote</div>';
   html += '<div class="shm-pkg-name" id="shm-pkg-name"></div>';
   html += '<div class="shm-price" id="shm-pkg-price"></div>';
-  html += '<div class="shm-period">one-time setup</div></div>';
+  html += '<div class="shm-period" id="shm-period">per month</div></div>';
   html += '<div class="shm-features"><h4>What\'s Included</h4><div id="shm-feat-list"></div></div>';
   html += '<button class="shm-cta" id="shm-cta">Get Started Now</button>';
   html += '<button class="shm-restart" id="shm-restart">Start Over</button>';
@@ -256,6 +317,7 @@
               opt.classList.add('sel');
               answers[key] = opt.getAttribute('data-value');
             }
+            updateToggles();
             updateButtons();
           });
         })(opts[o]);
@@ -263,12 +325,36 @@
     })(optionGroups[g]);
   }
 
+  // Toggle clicks
+  var toggleRows = root.querySelectorAll('.shm-toggle-row');
+  for (var t = 0; t < toggleRows.length; t++) {
+    (function(row) {
+      var tKey = row.getAttribute('data-toggle-key');
+      row.addEventListener('click', function() {
+        row.classList.toggle('sel');
+        answers[tKey] = row.classList.contains('sel');
+      });
+    })(toggleRows[t]);
+  }
+
+  function updateToggles() {
+    // Show social management toggle only when social is not "none"
+    var smToggle = document.getElementById('shm-toggle-socialManagement');
+    if (smToggle) {
+      if (answers.social && answers.social !== 'none') {
+        smToggle.classList.add('visible');
+      } else {
+        smToggle.classList.remove('visible');
+        smToggle.classList.remove('sel');
+        answers.socialManagement = false;
+      }
+    }
+  }
+
   function updateButtons() {
     for (var i = 0; i < totalSteps; i++) {
       var btn = document.getElementById('shm-next-' + i);
-      if (stepsData[i].required) {
-        btn.disabled = !answers[stepsData[i].key];
-      }
+      if (stepsData[i].required) btn.disabled = !answers[stepsData[i].key];
     }
   }
 
@@ -286,75 +372,124 @@
   var backs = root.querySelectorAll('.shm-back');
   for (var b = 0; b < backs.length; b++) {
     (function(btn) {
-      btn.addEventListener('click', function() {
-        goTo(parseInt(btn.getAttribute('data-go')));
-      });
+      btn.addEventListener('click', function() { goTo(parseInt(btn.getAttribute('data-go'))); });
     })(backs[b]);
   }
 
-  // Recommendation logic
-  function getRecommendation() {
-    var score = 0;
-    if (answers.podcastType === 'video') score += 2;
-    if (answers.recordingLocation === 'studio') score += 1;
-    if (answers.recordingLocation === 'on-location') score += 3;
-    if (answers.productionLevel === 'full') score += 1;
-    if (answers.branding && answers.branding.length >= 3) score += 1;
-    if (answers.social === 'full-social') score += 2;
-    if (answers.management === 'guest-booking') score += 1;
-    if (answers.management === 'full-management') score += 2;
-    if (score >= 7) return 'ultimate';
-    if (score >= 3) return 'premium';
-    return 'essential';
+  // ── Calculate price ───────────────────────────────────────────
+  function calculatePrice() {
+    var total = BASE_PRICE;
+    total += PRICING.format[answers.podcastType] || 0;
+    total += PRICING.podcastStyle[answers.podcastStyle] || 0;
+    total += PRICING.micCount[answers.micCount] || 0;
+    total += PRICING.frequency[answers.frequency] || 0;
+    total += PRICING.location[answers.recordingLocation] || 0;
+    if (answers.branding && answers.branding.length) {
+      for (var i = 0; i < answers.branding.length; i++) total += PRICING.branding[answers.branding[i]] || 0;
+    }
+    total += PRICING.social[answers.social] || 0;
+    if (answers.socialManagement) total += PRICING.socialManagement;
+    total += PRICING.serviceLevel[answers.serviceLevel] || 0;
+    if (total < MIN_PRICE) total = MIN_PRICE;
+    return total;
   }
 
+  // ── Build features list ───────────────────────────────────────
   function getFeatures() {
     var f = [];
+
+    // Audio (always)
     f.push('Professional audio editing and mastering');
-    if (answers.productionLevel === 'full') {
+    if (answers.podcastStyle === 'scripted') {
+      f.push('Scripted production with sound design and narration support');
+    } else {
       f.push('Multi-track editing and sound design');
-      f.push('Original theme music composed for your show');
     }
     f.push('Custom intros, outros, and transitions');
+
+    // Mic count
+    var micLabels = { solo: '1 microphone setup (host)', two: '2 microphone setup (host + 1 guest)', three: '3 microphone setup (host + 2 guests)', 'four-plus': '4+ microphone setup (host + 3+ guests)' };
+    f.push(micLabels[answers.micCount]);
+
+    // Video
     if (answers.podcastType === 'video') {
-      if (answers.recordingLocation === 'on-location') {
-        f.push('On-location video recording anywhere you need');
-        f.push('Multi-camera setup with 3\u20136 cameras');
-        f.push('Professional video editing and branding');
-        f.push('On-site producer to oversee the shoot');
-        f.push('All lighting, microphones, and camera equipment provided');
-        f.push('Videos optimized for YouTube and social media');
-      } else {
-        f.push('Video recording in our studio or virtual setup');
-        f.push('Multi-camera video setup');
-      }
+      var camLabels = { solo: '1 camera setup', two: '2 camera setup', three: '3 camera setup', 'four-plus': 'Multi-camera setup (4+ cameras)' };
+      f.push(camLabels[answers.micCount]);
+      f.push('Professional video editing and branding');
     }
+
+    // Frequency
+    var freqLabels = { weekly: 'Weekly episode production', 'every-other-week': 'Bi-weekly episode production', monthly: 'Monthly episode production', 'limited-run': 'Limited run series production' };
+    f.push(freqLabels[answers.frequency]);
+
+    // Location
+    if (answers.recordingLocation === 'studio') {
+      f.push('Recording at our professional studio on Melrose Ave');
+    } else if (answers.recordingLocation === 'on-location') {
+      f.push('On-location recording anywhere you need');
+      f.push('All equipment provided and set up on site');
+      if (answers.podcastType === 'video') {
+        f.push('Lighting, cameras, and microphone setup included');
+        f.push('On-site producer to oversee the shoot');
+      }
+    } else {
+      f.push('Remote / virtual recording support');
+    }
+
+    // Branding
     if (answers.branding) {
       if (answers.branding.indexOf('cover-art') !== -1) f.push('Custom branding package (cover art and logo)');
       if (answers.branding.indexOf('distribution') !== -1) f.push('Distribution to all major platforms');
-      if (answers.branding.indexOf('scheduling') !== -1) f.push('Weekly publishing and scheduling');
+      if (answers.branding.indexOf('scheduling') !== -1) f.push('Publishing and scheduling');
       if (answers.branding.indexOf('analytics') !== -1) f.push('Analytics and growth tracking');
     }
-    if (answers.social === 'basic-clip') f.push('One custom social media clip per episode');
-    if (answers.social === 'full-social') {
-      f.push('Full social media content creation (clips, audiograms, graphics)');
-      f.push('Enhanced social assets including trailers and thumbnails');
+
+    // Social
+    if (answers.social === '1-asset') {
+      f.push('1 social media asset per episode');
+    } else if (answers.social === '3-assets') {
+      f.push('3 social media assets per episode (clips, audiograms, graphics)');
+    } else if (answers.social === '7-10-assets') {
+      f.push('7\u201310 social media assets per episode');
+      f.push('Full content suite: reels, carousels, audiograms, and graphics');
     }
-    if (answers.management === 'guest-booking') f.push('Guest booking and scheduling assistance');
-    if (answers.management === 'full-management') {
+    if (answers.socialManagement && answers.social !== 'none') {
+      f.push('Social media management \u2014 we schedule and post for you');
+    }
+
+    // Service level
+    if (answers.serviceLevel === 'full-service') {
+      f.push('Full done-for-you service: recording, editing, publishing, and promotion');
       f.push('Dedicated production manager');
-      f.push('Priority support for urgent needs');
-      f.push('Guest booking and scheduling assistance');
+      f.push('Priority support');
+    } else if (answers.serviceLevel === 'production-only') {
+      f.push('Full recording and production \u2014 finished files delivered to you');
+    } else {
+      f.push('Professional editing \u2014 polished files delivered to you');
     }
+
     return f;
   }
 
+  function getQuoteLabel(price) {
+    if (price <= 2000) return { badge: 'Starter', name: 'Custom Starter Package' };
+    if (price <= 3500) return { badge: 'Essential', name: 'Custom Essential Package' };
+    if (price <= 5000) return { badge: 'Most Popular', name: 'Custom Premium Package' };
+    return { badge: 'All-Inclusive', name: 'Custom Ultimate Package' };
+  }
+
   function showResult() {
-    var key = getRecommendation();
-    var pkg = packages[key];
-    document.getElementById('shm-badge').textContent = pkg.badge || 'Recommended';
-    document.getElementById('shm-pkg-name').textContent = pkg.name;
-    document.getElementById('shm-pkg-price').textContent = '$' + pkg.price.toLocaleString();
+    var price = calculatePrice();
+    var label = getQuoteLabel(price);
+    document.getElementById('shm-badge').textContent = label.badge;
+    document.getElementById('shm-pkg-name').textContent = label.name;
+    document.getElementById('shm-pkg-price').textContent = '$' + price.toLocaleString();
+    var periodEl = document.getElementById('shm-period');
+    if (answers.frequency === 'limited-run') {
+      periodEl.textContent = 'per episode';
+    } else {
+      periodEl.textContent = 'per month';
+    }
     var features = getFeatures();
     var fhtml = '';
     for (var i = 0; i < features.length; i++) {
@@ -370,6 +505,11 @@
     answers = {};
     var allOpts = root.querySelectorAll('.shm-opt');
     for (var i = 0; i < allOpts.length; i++) allOpts[i].classList.remove('sel');
+    var allToggles = root.querySelectorAll('.shm-toggle-row');
+    for (var i = 0; i < allToggles.length; i++) {
+      allToggles[i].classList.remove('sel');
+      allToggles[i].classList.remove('visible');
+    }
     updateButtons();
     goTo(0);
   });
