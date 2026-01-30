@@ -179,7 +179,7 @@
       options: [
         { value: 'cover-art', icon: 'image', label: 'Custom Branding Package', desc: 'Professional cover art and logo designed for your show' },
         { value: 'distribution', icon: 'share', label: 'Distribution to All Major Platforms', desc: 'Apple Podcasts, Spotify, Google, and more' },
-        { value: 'scheduling', icon: 'calendar', label: 'Publishing & Scheduling', desc: 'Consistent release schedule managed for you' },
+        { value: 'scheduling', icon: 'calendar', label: 'Booking & Scheduling Coordination', desc: 'We coordinate with hosts, guests, and studio space to get sessions on the books' },
         { value: 'analytics', icon: 'chart', label: 'Analytics & Growth Tracking', desc: 'Monitor your performance and listener trends' }
       ]
     },
@@ -440,7 +440,7 @@
     if (answers.branding) {
       if (answers.branding.indexOf('cover-art') !== -1) f.push('Custom branding package (cover art and logo)');
       if (answers.branding.indexOf('distribution') !== -1) f.push('Distribution to all major platforms');
-      if (answers.branding.indexOf('scheduling') !== -1) f.push('Publishing and scheduling');
+      if (answers.branding.indexOf('scheduling') !== -1) f.push('Booking and scheduling coordination (hosts, guests, studio)');
       if (answers.branding.indexOf('analytics') !== -1) f.push('Analytics and growth tracking');
     }
 
