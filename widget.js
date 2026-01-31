@@ -78,7 +78,7 @@
 
   // ── Configuration ────────────────────────────────────────────
   // Replace with your Calendly scheduling URL
-  var CALENDLY_URL = 'https://calendly.com/strawhutmedia/podcast-consultation';
+  var CALENDLY_URL = 'https://calendly.com/strawhutmedia/discovery';
 
   // ── Helpers ────────────────────────────────────────────────────
   var CHK = '<svg viewBox="0 0 16 16"><polyline points="3.5 8 6.5 11 12.5 5"/></svg>';
