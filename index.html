@@ -401,7 +401,7 @@
           <li><svg viewBox="0 0 16 16"><polyline points="3.5 8 6.5 11 12.5 5"/></svg>Custom branding package (cover art, logo)</li>
           <li><svg viewBox="0 0 16 16"><polyline points="3.5 8 6.5 11 12.5 5"/></svg>One custom social media clip per episode</li>
         </ul>
-        <a href="https://services.strawhutmedia.com/" target="_blank" class="pkg-btn pkg-btn-outline">Get Started Now</a>
+        <button class="pkg-btn pkg-btn-outline shm-pkg-cta" data-package="Essential Podcast Package — $2,450/month" data-features="Professional audio editing and mastering, Multi-track editing and sound design, Custom intros/outros/transitions, Distribution to all major platforms, Weekly publishing and scheduling, Basic analytics, Custom branding package, One custom social media clip per episode">Get Started Now</button>
       </div>
 
       <!-- Premium Studio Podcast Package -->
@@ -421,7 +421,7 @@
           <li><svg viewBox="0 0 16 16"><polyline points="3.5 8 6.5 11 12.5 5"/></svg>Dedicated manager for seamless production</li>
           <li><svg viewBox="0 0 16 16"><polyline points="3.5 8 6.5 11 12.5 5"/></svg>Priority support for urgent needs</li>
         </ul>
-        <a href="https://services.strawhutmedia.com/" target="_blank" class="pkg-btn pkg-btn-primary">Get Started Now</a>
+        <button class="pkg-btn pkg-btn-primary shm-pkg-cta" data-package="Premium Studio Podcast Package — $4,350/month" data-features="Everything in Essential, plus: Video recording (studio or virtual), Original theme music, Guest booking and scheduling, Multi-camera video setup, Full social media content creation, Dedicated production manager, Priority support">Get Started Now</button>
       </div>
 
       <!-- Ultimate On-Location Podcast Package -->
@@ -441,7 +441,7 @@
           <li><svg viewBox="0 0 16 16"><polyline points="3.5 8 6.5 11 12.5 5"/></svg>Enhanced social media assets, including trailers and thumbnails</li>
           <li><svg viewBox="0 0 16 16"><polyline points="3.5 8 6.5 11 12.5 5"/></svg>Videos optimized for YouTube and social media</li>
         </ul>
-        <a href="https://services.strawhutmedia.com/" target="_blank" class="pkg-btn pkg-btn-outline">Get Started Now</a>
+        <button class="pkg-btn pkg-btn-outline shm-pkg-cta" data-package="Ultimate On-Location Podcast Package — $6,550/month" data-features="Everything in Premium, plus: On-location recording anywhere, Multi-camera setup (3-6 cameras), Professional video editing and branding, On-site producer, Lighting/microphones/camera setup included, Enhanced social media assets (trailers, thumbnails), Videos optimized for YouTube and social">Get Started Now</button>
       </div>
 
     </div>
@@ -473,6 +473,7 @@
   <script src="widget.js"></script>
   <script>
     (function() {
+      var CALENDLY_URL = 'https://calendly.com/strawhutmedia/discovery';
       var packagesView = document.getElementById('packages-view');
       var quizView = document.getElementById('quiz-view');
 
@@ -487,6 +488,49 @@
         packagesView.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+
+      // ── Calendly for package "Get Started" buttons ──────────
+      function loadCalendly(callback) {
+        if (window.Calendly) { callback(); return; }
+        var link = document.createElement('link');
+        link.href = 'https://assets.calendly.com/assets/external/widget.css';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+        var script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.onload = callback;
+        document.head.appendChild(script);
+      }
+
+      // Preload Calendly on page load
+      loadCalendly(function() {});
+
+      var pkgBtns = document.querySelectorAll('.shm-pkg-cta');
+      for (var i = 0; i < pkgBtns.length; i++) {
+        (function(btn) {
+          btn.addEventListener('click', function() {
+            var pkg = btn.getAttribute('data-package');
+            var features = btn.getAttribute('data-features');
+            var summary = '=== PACKAGE SELECTION ===\n\n'
+              + 'Selected Package: ' + pkg + '\n\n'
+              + '--- What\'s Included ---\n'
+              + features.split(', ').map(function(f) { return '• ' + f; }).join('\n');
+
+            if (window.Calendly) {
+              window.Calendly.initPopupWidget({
+                url: CALENDLY_URL + '?hide_gdpr_banner=1',
+                prefill: {
+                  customAnswers: {
+                    a1: summary
+                  }
+                }
+              });
+            } else {
+              window.open(CALENDLY_URL + '?a1=' + encodeURIComponent(summary), '_blank');
+            }
+          });
+        })(pkgBtns[i]);
+      }
     })();
   </script>
 
