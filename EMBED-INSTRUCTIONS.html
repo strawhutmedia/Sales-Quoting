@@ -3,89 +3,232 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Embed Instructions — Straw Hut Quote Widget</title>
+  <title>Developer Integration Guide — Straw Hut Media Podcast Packages + Quote Widget</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #1a1f3d; line-height: 1.6; }
-    h1 { font-size: 1.8rem; margin-bottom: 8px; }
-    h2 { font-size: 1.2rem; margin-top: 36px; margin-bottom: 12px; color: #2dd4a0; }
-    p { margin-bottom: 16px; color: #374151; }
-    .code-block { background: #1a1f3d; color: #e2e4e8; padding: 20px; border-radius: 12px; overflow-x: auto; margin-bottom: 24px; font-family: 'SF Mono', Monaco, 'Courier New', monospace; font-size: 0.85rem; line-height: 1.6; }
-    .code-block code { color: #e2e4e8; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 840px; margin: 40px auto; padding: 0 20px; color: #1a1f3d; line-height: 1.7; }
+    h1 { font-size: 1.8rem; margin-bottom: 4px; }
+    .intro { color: #6b7280; font-size: 0.95rem; margin-bottom: 32px; }
+    h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; color: #2dd4a0; border-bottom: 1px solid #e2e4e8; padding-bottom: 8px; }
+    h3 { font-size: 1.05rem; margin-top: 24px; margin-bottom: 8px; color: #1a1f3d; }
+    p, li { margin-bottom: 12px; color: #374151; }
+    ol, ul { padding-left: 24px; }
+    code { background: #f0f1f3; padding: 2px 6px; border-radius: 4px; font-size: 0.88rem; font-family: 'SF Mono', Monaco, 'Courier New', monospace; }
+    .code-block { background: #1a1f3d; color: #e2e4e8; padding: 20px 24px; border-radius: 12px; overflow-x: auto; margin: 16px 0 24px; font-family: 'SF Mono', Monaco, 'Courier New', monospace; font-size: 0.84rem; line-height: 1.7; white-space: pre; }
     .highlight { color: #2dd4a0; }
     .comment { color: #6b7280; }
     .tag { color: #93c5fd; }
     .attr { color: #fbbf24; }
-    .divider { border: none; border-top: 1px solid #e2e4e8; margin: 36px 0; }
-    .badge { display: inline-block; background: #2dd4a0; color: white; font-size: 0.75rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
+    .str { color: #f9a8d4; }
+    .divider { border: none; border-top: 2px solid #e2e4e8; margin: 40px 0; }
+    .badge { display: inline-block; background: #2dd4a0; color: white; font-size: 0.72rem; font-weight: 700; padding: 3px 12px; border-radius: 20px; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
+    .warn { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 0.9rem; }
+    .info { background: rgba(45,212,160,0.08); border-left: 4px solid #2dd4a0; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 0.9rem; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; }
+    th { text-align: left; padding: 10px 12px; background: #f8f9fa; border-bottom: 2px solid #e2e4e8; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: #6b7280; }
+    td { padding: 10px 12px; border-bottom: 1px solid #e2e4e8; font-size: 0.9rem; }
   </style>
 </head>
 <body>
 
-<h1>Podcast Quote Widget — Embed Guide</h1>
-<p>Two ways to add the quote builder to the Straw Hut services page.</p>
+<h1>Developer Integration Guide</h1>
+<p class="intro">Straw Hut Media — Podcast Packages Page + Custom Quote Builder Widget<br>
+Target platform: <strong>ASP.NET</strong> &nbsp;|&nbsp; Dependencies: <strong>None</strong> (Calendly widget loaded dynamically)</p>
 
 <hr class="divider">
 
-<h2>Option A: iframe Embed <span class="badge">Easiest</span></h2>
-<p>Host <code>embed.html</code> anywhere (GitHub Pages, your own server, CDN) and embed it with a single line. No conflicts with your existing site CSS or JS.</p>
+<h2>Architecture Overview</h2>
+<p>This repo contains two things that need to go on the Straw Hut website:</p>
 
-<div class="code-block"><code><span class="comment">&lt;!-- Straw Hut Podcast Quote Builder --&gt;</span>
-<span class="tag">&lt;iframe</span>
-  <span class="attr">src</span>=<span class="highlight">"https://strawhutmedia.github.io/Sales-Quoting/embed.html"</span>
-  <span class="attr">width</span>=<span class="highlight">"100%"</span>
-  <span class="attr">height</span>=<span class="highlight">"700"</span>
-  <span class="attr">frameborder</span>=<span class="highlight">"0"</span>
-  <span class="attr">style</span>=<span class="highlight">"border:none; max-width:600px; display:block; margin:0 auto;"</span>
-<span class="tag">&gt;&lt;/iframe&gt;</span></code></div>
-
-<p><strong>Note:</strong> Update the <code>src</code> URL to wherever you host <code>embed.html</code>. If using GitHub Pages, the URL will be <code>https://strawhutmedia.github.io/Sales-Quoting/embed.html</code></p>
-
-<hr class="divider">
-
-<h2>Option B: Direct Embed (Inline) <span class="badge">No iframe</span></h2>
-<p>Drop this directly into the services page HTML. The widget renders inline — no iframe needed. All styles are scoped to <code>#shm-quote-widget</code> so they won't conflict with the rest of the page.</p>
-
-<div class="code-block"><code><span class="comment">&lt;!-- Straw Hut Podcast Quote Builder — paste this where you want the widget --&gt;</span>
-<span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="highlight">"shm-quote-widget"</span><span class="tag">&gt;&lt;/div&gt;</span>
-<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="highlight">"https://strawhutmedia.github.io/Sales-Quoting/widget.js"</span><span class="tag">&gt;&lt;/script&gt;</span></code></div>
-
-<p>That's it — two lines. The script auto-initializes, injects its own scoped styles, and builds the entire widget inside the <code>div</code>.</p>
-
-<hr class="divider">
-
-<h2>Setup: Enable GitHub Pages (one-time)</h2>
-<p>To get the public URL for hosting, enable GitHub Pages on the repo:</p>
-<ol style="color:#374151; margin-bottom: 24px;">
-  <li>Go to <strong>github.com/strawhutmedia/Sales-Quoting</strong></li>
-  <li>Click <strong>Settings</strong> (top tab bar)</li>
-  <li>In the left sidebar, click <strong>Pages</strong></li>
-  <li>Under <strong>Source</strong>, select the branch: <code>claude/podcast-quote-widget-TNvH2</code> (or <code>main</code> after merge)</li>
-  <li>Set folder to <code>/ (root)</code></li>
-  <li>Click <strong>Save</strong></li>
-  <li>Wait 1–2 minutes. Your URL will be: <code>https://strawhutmedia.github.io/Sales-Quoting/</code></li>
-</ol>
-
-<hr class="divider">
-
-<h2>Files in this repo</h2>
-<table style="width:100%; border-collapse:collapse; margin-bottom:24px;">
-  <tr style="border-bottom:1px solid #e2e4e8;">
-    <td style="padding:8px 0;"><strong>index.html</strong></td>
-    <td style="padding:8px 0; color:#6b7280;">Full standalone page (dark background, logo, card) — preview URL</td>
-  </tr>
-  <tr style="border-bottom:1px solid #e2e4e8;">
-    <td style="padding:8px 0;"><strong>embed.html</strong></td>
-    <td style="padding:8px 0; color:#6b7280;">Transparent-background version for iframe embedding</td>
-  </tr>
-  <tr style="border-bottom:1px solid #e2e4e8;">
-    <td style="padding:8px 0;"><strong>widget.js</strong></td>
-    <td style="padding:8px 0; color:#6b7280;">Self-contained JS for direct inline embed (Option B)</td>
+<table>
+  <tr><th>Component</th><th>File(s)</th><th>What it does</th></tr>
+  <tr>
+    <td><strong>Packages Page</strong></td>
+    <td><code>index.html</code></td>
+    <td>3 package cards (Essential / Premium / Ultimate) + "Build Your Custom Package" CTA. Each card's "Get Started" button opens a Calendly popup with the package details pre-filled.</td>
   </tr>
   <tr>
-    <td style="padding:8px 0;"><strong>EMBED-INSTRUCTIONS.html</strong></td>
-    <td style="padding:8px 0; color:#6b7280;">This file</td>
+    <td><strong>Quote Widget</strong></td>
+    <td><code>widget.js</code></td>
+    <td>Self-contained quiz (8 steps). Calculates a custom price and feature list. "Schedule a Call" CTA opens Calendly with all quiz answers pre-filled.</td>
   </tr>
 </table>
+
+<div class="info"><strong>How it works:</strong> When a visitor clicks any "Get Started" button (on packages or quiz), it opens a Calendly popup for a 15-minute discovery call. All selections (package name or quiz answers) are automatically injected into a custom Calendly field so the team receives the details in the calendar invite and email.</div>
+
+<hr class="divider">
+
+<h2>Option A: Full Page Integration <span class="badge">Recommended</span></h2>
+<p>Copy the packages page content into an ASP.NET view/page. This gives you the 3 package cards + custom quote builder all on one page.</p>
+
+<h3>Step 1 — Copy <code>widget.js</code> to your static files</h3>
+<p>Place <code>widget.js</code> in your scripts directory, e.g.:</p>
+<div class="code-block">/Content/scripts/widget.js
+<span class="comment">— or —</span>
+/wwwroot/js/widget.js
+<span class="comment">— or wherever your ASP.NET project serves static JS from</span></div>
+
+<h3>Step 2 — Create the page</h3>
+<p>Create a new view/page (e.g. <code>Packages.cshtml</code> or <code>Packages.aspx</code>). Copy the HTML content from <code>index.html</code> into your site's layout. Specifically, you need:</p>
+
+<ol>
+  <li><strong>The CSS</strong> — Everything inside the <code>&lt;style&gt;</code> tag in <code>index.html</code>. Add this to your site's stylesheet or keep it in a <code>&lt;style&gt;</code> block on the page.</li>
+  <li><strong>The HTML</strong> — The two main <code>&lt;div&gt;</code> sections:
+    <ul>
+      <li><code>&lt;div id="packages-view"&gt; ... &lt;/div&gt;</code> — the 3 package cards + custom CTA</li>
+      <li><code>&lt;div id="quiz-view"&gt; ... &lt;/div&gt;</code> — the quiz container</li>
+    </ul>
+  </li>
+  <li><strong>The scripts</strong> — The <code>widget.js</code> reference + the inline <code>&lt;script&gt;</code> block at the bottom</li>
+</ol>
+
+<h3>Step 3 — Update the script path</h3>
+<p>In the copied HTML, update the widget.js path to match where you placed it:</p>
+
+<div class="code-block"><span class="comment">&lt;!-- Update this path to match your ASP.NET static file location --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="highlight">"~/Content/scripts/widget.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+
+<span class="comment">&lt;!-- Or if using ASP.NET Core: --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="highlight">"/js/widget.js"</span><span class="tag">&gt;&lt;/script&gt;</span></div>
+
+<h3>Step 4 — Done!</h3>
+<p>That's it. The widget and Calendly integration are fully self-contained. No npm packages, no build step, no API keys.</p>
+
+<hr class="divider">
+
+<h2>Option B: Quiz Widget Only</h2>
+<p>If you only want the custom quote builder (no package cards), it's just two lines:</p>
+
+<div class="code-block"><span class="comment">&lt;!-- Paste this wherever you want the quiz widget to appear --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="highlight">"shm-quote-widget"</span><span class="tag">&gt;&lt;/div&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="highlight">"~/Content/scripts/widget.js"</span><span class="tag">&gt;&lt;/script&gt;</span></div>
+
+<p>The widget auto-initializes, injects its own scoped CSS (all prefixed with <code>#shm-quote-widget</code>), and won't conflict with existing page styles. Max width is 560px, centered by default.</p>
+
+<hr class="divider">
+
+<h2>File Reference</h2>
+
+<table>
+  <tr><th>File</th><th>Purpose</th><th>Needs to go on production?</th></tr>
+  <tr>
+    <td><code>widget.js</code></td>
+    <td>Self-contained quote builder widget. All HTML, CSS, and logic in one file. Includes Calendly integration.</td>
+    <td><strong>Yes</strong> — copy to your static files directory</td>
+  </tr>
+  <tr>
+    <td><code>index.html</code></td>
+    <td>Full standalone page with packages + quiz. Use as the <strong>source to copy from</strong> when building your ASP.NET page.</td>
+    <td>No — reference only (copy the HTML/CSS into your ASP.NET view)</td>
+  </tr>
+  <tr>
+    <td><code>embed.html</code></td>
+    <td>Transparent-background version of just the quiz for iframe embedding.</td>
+    <td>No — not needed for direct embed</td>
+  </tr>
+  <tr>
+    <td><code>EMBED-INSTRUCTIONS.html</code></td>
+    <td>This file.</td>
+    <td>No</td>
+  </tr>
+</table>
+
+<hr class="divider">
+
+<h2>Calendly Configuration</h2>
+<p>The Calendly integration is already wired up. Here's what's configured:</p>
+
+<table>
+  <tr><th>Setting</th><th>Value</th><th>Where</th></tr>
+  <tr>
+    <td>Calendly URL</td>
+    <td><code>https://calendly.com/strawhutmedia/discovery</code></td>
+    <td>Line 81 in <code>widget.js</code> and line 476 in <code>index.html</code></td>
+  </tr>
+  <tr>
+    <td>Custom Question</td>
+    <td>"Tell us about your project!" (multi-line text, Question 1)</td>
+    <td>Configured in Calendly event settings under Invitee Questions</td>
+  </tr>
+  <tr>
+    <td>Data passed</td>
+    <td>Mapped to <code>a1</code> (first custom answer)</td>
+    <td>Auto-filled via Calendly popup prefill API</td>
+  </tr>
+</table>
+
+<div class="warn"><strong>Important:</strong> If the Calendly URL ever changes, update it in <strong>two places</strong>:
+<br>1. <code>widget.js</code> — line 81: <code>var CALENDLY_URL = '...';</code>
+<br>2. <code>index.html</code> (your ASP.NET page) — the inline script near the bottom: <code>var CALENDLY_URL = '...';</code></div>
+
+<hr class="divider">
+
+<h2>What Gets Sent to Calendly</h2>
+
+<h3>From Package Cards ("Get Started" buttons):</h3>
+<div class="code-block"><span class="comment">=== PACKAGE SELECTION ===</span>
+
+Selected Package: Premium Studio Podcast Package — $4,350/month
+
+<span class="comment">--- What's Included ---</span>
+• Everything in Essential, plus:
+• Video recording (studio or virtual)
+• Original theme music
+• Guest booking and scheduling
+• Multi-camera video setup
+• Full social media content creation
+• Dedicated production manager
+• Priority support</div>
+
+<h3>From Quiz Widget ("Schedule a Call" button):</h3>
+<div class="code-block"><span class="comment">=== PODCAST QUOTE BUILDER RESULTS ===</span>
+
+Package: Custom Premium Package (Most Popular)
+Estimated Price: $3,600/month
+
+<span class="comment">--- Quiz Answers ---</span>
+Podcast Type: Audio + Video
+Podcast Style: Conversational
+Service Level: Full Service — Done for You
+People on Mic: Host + 1 Guest (2 mics)
+Release Frequency: Weekly
+Recording Location: In Our Studio
+Branding & Distribution: Custom Branding Package, Distribution to All Major Platforms
+Social Media Content: 3 Assets per Episode
+
+<span class="comment">--- What's Included ---</span>
+• Professional audio editing and mastering
+• Multi-track editing and sound design
+• Custom intros, outros, and transitions
+<span class="comment">  ... (full feature list)</span></div>
+
+<hr class="divider">
+
+<h2>Customization Quick Reference</h2>
+
+<table>
+  <tr><th>To change...</th><th>Edit this</th></tr>
+  <tr><td>Calendly booking link</td><td><code>CALENDLY_URL</code> in <code>widget.js</code> line 81 + inline script in page</td></tr>
+  <tr><td>Package names / prices / features</td><td>The <code>.pkg-card</code> HTML blocks + the <code>data-package</code> and <code>data-features</code> attributes on each button</td></tr>
+  <tr><td>Quiz questions or options</td><td><code>stepsData</code> array in <code>widget.js</code> (starts around line 127)</td></tr>
+  <tr><td>Pricing logic</td><td><code>PRICING</code> object in <code>widget.js</code> (around line 222)</td></tr>
+  <tr><td>Widget max width</td><td>CSS in <code>widget.js</code> line 18: <code>max-width:560px</code></td></tr>
+  <tr><td>Brand colors (green/navy)</td><td>CSS variables at top of <code>widget.js</code> line 18</td></tr>
+</table>
+
+<hr class="divider">
+
+<h2>Google Fonts Dependency</h2>
+<p>The page uses the <strong>Inter</strong> font. If your site doesn't already load it, add this to your <code>&lt;head&gt;</code>:</p>
+
+<div class="code-block"><span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="highlight">"preconnect"</span> <span class="attr">href</span>=<span class="highlight">"https://fonts.googleapis.com"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="highlight">"preconnect"</span> <span class="attr">href</span>=<span class="highlight">"https://fonts.gstatic.com"</span> <span class="attr">crossorigin</span><span class="tag">&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">href</span>=<span class="highlight">"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"</span> <span class="attr">rel</span>=<span class="highlight">"stylesheet"</span><span class="tag">&gt;</span></div>
+
+<p>If your site uses a different font, the widget will fall back to the system font stack gracefully.</p>
+
+<hr class="divider">
+
+<p style="color:#6b7280; font-size:0.85rem; text-align:center; margin-top:40px;">Questions? Reach out to the team. This integration has zero external dependencies and no build step — just static HTML, CSS, and JS.</p>
 
 </body>
 </html>
