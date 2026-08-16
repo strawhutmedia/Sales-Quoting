@@ -15,7 +15,7 @@
   // ── Inject scoped styles ──────────────────────────────────────
   var style = document.createElement('style');
   style.textContent = [
-    "#shm-quote-widget{--shm-navy:#1a1f3d;--shm-navy-light:#252b52;--shm-green:#2dd4a0;--shm-green-hover:#25b888;--shm-green-soft:rgba(45,212,160,.1);--shm-white:#fff;--shm-g50:#f8f9fa;--shm-g100:#f0f1f3;--shm-g200:#e2e4e8;--shm-g400:#9ca3af;--shm-g500:#6b7280;--shm-g700:#374151;--shm-g800:#1f2937;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;width:100%;max-width:560px;margin:0 auto}",
+    "#shm-quote-widget{--shm-navy:#12182f;--shm-navy-light:#232c4e;--shm-green:#00cc8e;--shm-green-hover:#00e6a0;--shm-green-soft:rgba(0,204,142,.1);--shm-white:#fff;--shm-g50:#f8f9fa;--shm-g100:#f0f1f3;--shm-g200:#e2e4e8;--shm-g400:#9ca3af;--shm-g500:#6b7280;--shm-g700:#374151;--shm-g800:#1f2937;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;width:100%;max-width:560px;margin:0 auto}",
     "#shm-quote-widget *{box-sizing:border-box;margin:0;padding:0}",
     "#shm-quote-widget .shm-card{background:var(--shm-white);border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.12);overflow:hidden}",
     "#shm-quote-widget .shm-progress{height:4px;background:var(--shm-g100);width:100%}",
