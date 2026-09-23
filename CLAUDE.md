@@ -302,4 +302,8 @@ repo.
 - Git: this file first lived on `claude/tourism-podcast-pitch-olu47p` and
   `main` has only a README. The current working branch is
   `claude/sales-quoting-standards-wxbqx5`. Push with
-  `git push -u origin <branch>`. Don't push to `main`.
+  `git push -u origin <branch>`.
+- **Merge your own PRs yourself — never wait on Ryan to merge.** Ryan,
+  2026-09-23: *"You don't wait on me to merge, you merge!!"* Once a PR you
+  opened is clean (no conflicts, no open review threads), mark it ready and
+  merge it in the same session.
