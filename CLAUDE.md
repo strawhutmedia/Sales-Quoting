@@ -1,0 +1,288 @@
+# Sales-Quoting — operating notes for Claude
+
+**Keep this file current — update it whenever anything changes.**
+
+---
+
+## What this is
+
+This repo is the working home for **Straw Hut Media's client-facing sales
+documents**: proposals, quotes, and the long-form services agreements that
+follow them. It is not an application. There is no build, no deploy, no tests.
+
+The actual deliverables live in **Google Drive** (Docs) and are handed to
+clients as **PDFs**. This repo holds the operating knowledge: house style,
+pricing, document inventory, decisions already made, and what's still open.
+
+Owner: **Ryan Tillotson**, Founder & CEO (`ryan@strawhutmedia.com`).
+
+---
+
+## HARD RULES — read before doing anything
+
+1. **Never send email to a client, prospect, fan, or lead** without an
+   explicit, same-turn instruction from Ryan to send it. Draft it and hand it
+   back. This covers every tool — Gmail, SES, QuickBooks, anything.
+2. **Email to Ryan himself is fine** without asking first. Only Ryan.
+3. **Never share a Google Doc with anyone.** Every Doc listed below is
+   private on purpose. Ryan shares things himself.
+4. **Never trash a Google Doc that has been sent to a client.** See the
+   incident under "What's broken" — this already went wrong once. Before
+   trashing any Doc, check whether its link has gone out to anyone.
+5. **Never quote the hourly studio rate** in a proposal. Retainer-first.
+6. **Never say "AI"** in client-facing copy.
+7. **The client always owns their show.** Straw Hut *runs* or *leads* it —
+   never "owns" it. This wording matters and appears in every agreement.
+
+---
+
+## ⭐ HOUSE STYLE — the Die With Zero proposal is the standard (set 2026-09-23)
+
+**Every client proposal is modelled on the DWZ proposal, Doc
+`15d24sVuf9zk96bsEakHx71uk1j0OrYVRR1elmnYn500`.** Read it before drafting.
+
+- **Arial 11pt, plain Google Docs headings** (Heading 1/2, bold, black). Body
+  is ordinary paragraphs and bullet lists.
+- **No design flourishes:** no colours, no oversized/display type, no callout
+  or shaded boxes, no multi-column layouts, no cover page.
+- Tables only where the content really is a table (cost components, budgets):
+  plain 1px black borders.
+- **Signature blocks are stacked `By: / Name: / Title: / Date:` lines**, one
+  block per party (Straw Hut first, Ryan's name and title pre-filled). No
+  side-by-side columns.
+- Section order (DWZ): title block (kicker, show name, italic subtitle,
+  Prepared for / Prepared by / Date, one-sentence italic summary) → Program
+  Details → What's Included → Your Team → Investment & Costs → (engagement-
+  specific sections) → Next Steps → Acceptance → Ryan's sign-off. Leave out
+  sections that don't apply. Don't add new kinds of section.
+- ⚠️ The DWZ proposal's footer has the **stale 822 N. Dillon St. address**.
+  Copy the layout, but use 7201 Melrose (see Key decisions).
+
+**Why:** big headings, columns and boxes make a document *look* long. The
+Flying V proposal came to **1,125 words and 3 pages in Docs styling, but 1,182
+words and 6 pages in the designed styling**, and Ryan read the designed one as
+"too long". When length is the complaint, the usual cause is the styling, not
+the word count.
+
+## How documents actually get produced
+
+The Google Drive connector **cannot edit a Doc in place.** Every revision
+means: create a brand-new Doc, then trash the old one (subject to rule 4).
+Each new Doc gets a new ID and URL, so any link already sent goes stale.
+
+The working pipeline — **one HTML source, one stylesheet, for both outputs**:
+
+1. Copy `templates/proposal.html` (skeleton in DWZ order) and fill it in. It
+   links `templates/docs-native.css`, which makes Chromium output look like a
+   Google Doc: Arial 11pt, line-height 1.15, headings 20/16/14pt, 1-inch
+   margins, Letter. **Don't restyle it per client.** Commit the filled-in
+   source to `proposals/<client>/` so it outlives the session.
+2. Render to PDF with headless Chromium (the version folder changes, so glob it):
+   ```
+   $(ls -d /opt/pw-browsers/chromium*/chrome-linux/chrome | head -1) --headless \
+     --disable-gpu --no-sandbox --print-to-pdf=out.pdf --no-pdf-header-footer \
+     "file:///abs/path/in.html"
+   ```
+3. **Verify the PDF**: `pip install pypdfium2 pillow`, extract the text to
+   check the key phrases are there, and **render the pages to PNG and look at
+   them**. Orphaned headings, tables split mid-row and half-empty pages only
+   show up when you look. The stylesheet already keeps tables, rows and
+   signature blocks whole.
+4. Create the Google Doc from the same HTML. The PDF and the Doc should look
+   alike and have about the same page count. If they don't, the HTML is using
+   something Docs strips (columns, flex, positioned boxes); remove it.
+
+### Formatting lessons Ryan has already given
+
+- **Length is a real objection, and it's usually the styling.** See the
+  1,125 vs 1,182 words (3 vs 6 pages) comparison above. Don't cut content he
+  asked for. Strip the design first.
+- When he says copy the structure of an existing proposal, mirror it
+  section for section.
+- Watch the literal `&amp;` bug: passing `&amp;` in a Drive file **title**
+  renders literally. Set the title with plain `&` via `update_file` after
+  creating.
+
+---
+
+## Pricing (source of truth: `strawhutmedia-site/src/views.js` → `PACKAGES`)
+
+| Tier | Price/mo | Shape |
+|---|---|---|
+| Essential | **$2,450** | Client records; we edit, brand, distribute, publish |
+| Premium (Studio) | **$4,350** | Adds studio recording, theme music, guest booking, dedicated manager |
+| Ultimate (On-Location) | **$6,550** | Adds on-location shoot, 3–6 cameras, on-site producer |
+
+Custom retainers exist outside this ladder (Die With Zero is $9,650/mo).
+
+---
+
+## Active clients
+
+### Die With Zero — Pacaso, Inc. (Austin Allison, CEO & Co-Founder)
+
+Custom engagement, not a package tier.
+
+- **Retainer:** $9,650/month, from Oct 1, 2026
+- **Initial Term:** Oct 1, 2026 → Mar 31, 2027 (6 months). Ryan deliberately
+  cut this from the proposal's 12-month minimum.
+- **After Mar 31, 2027:** converts automatically to month-to-month effective
+  Apr 1, 2027, unless a new fixed term is signed first. 30-day termination.
+- **Launch target:** Jan 1, 2027; biweekly cadence
+- **Contacts:** `austin@pacaso.com`, `lauren@pacaso.com` (Austin's colleague)
+- **Pass-through costs:** per-production-day budget (Studio Avenue $10,850 /
+  Home Avenue $6,600) plus travel & accommodations, invoiced within 30 days
+  of each shoot
+
+**Status:** Ryan emailed the agreement to Austin and Lauren himself on
+Mon Sep 21, 2026 (Gmail thread `1a0c0444b5ff92ce`). Awaiting their comments.
+
+### Flying V Group (Robb Fahrion, Co-Founder & CEO)
+
+Newport Beach performance digital-marketing agency, 450+ clients, founded
+2016. Not a first-time podcaster — **skip Podcasting 101**, lead on
+authority / credibility / pipeline. He is ROI- and attribution-driven and
+was flagged as the strongest lead in his batch ($5k+/mo marketing budget).
+
+- **Retainer:** $2,450/month (Essential), billed from Nov 1, 2026
+- **Term:** 12-month minimum
+- **Cadence:** up to 2 episodes/month. **No rollover of unused episodes —
+  Ryan explicitly said not to include any rollover language at all.**
+- **Format:** audio and video. Host is Robb.
+- **Recording:** in-house at Flying V offices; they send us the media
+- **Production begins** Nov 1, 2026; **launch** Jan 4, 2027
+- **Transition:** Flying V shoots *and releases* the first 3 episodes
+  themselves. Straw Hut takes over at episode 4.
+- **Payment:** card or ACH on file, charged at the top of each month
+- **Studio upgrade** offered at $4,350/mo (Premium)
+- **Show title:** TBD, to be developed together
+- **Day-to-day contacts:** Robb and his team, names TBD
+
+---
+
+## Document inventory (Google Drive — all private, none shared)
+
+| Document | File ID |
+|---|---|
+| DWZ — Podcast Services Agreement (current, has final Term language) | `1nGLsgfSD7LHs6k15aEKhN3qEem9nLq0XJM8YC5CVFvE` |
+| DWZ — agreement version Ryan actually emailed to Pacaso | `1uKnKSW-XN400kzt2gf8jMgV-siaHxPeAbEQuojszM08` ⚠️ **in Drive trash — see below** |
+| DWZ — original proposal (Sep 10, 2026) — **⭐ house-style standard for all proposals** | `15d24sVuf9zk96bsEakHx71uk1j0OrYVRR1elmnYn500` |
+| Flying V Group — proposal (current, restyled to DWZ house style 2026-09-23; Drive title is `Flying_V_Group_Podcast_Proposal` with underscores) | `1piO8KDCilp1EX5rQwgUgJMV7aSBfowQSs2wnGu-9pdc` |
+
+Superseded and **trashed**: both earlier Flying V proposal versions, including
+`1iU457UVSsTSjUGIpV-Bj9f3CnOHACSDxTnd36Tq7eCc`. Don't reference them.
+| DWZ — brainstorm episode template + book outline (Ryan's original) | `1kl5_Rq7fW0HaKr26vwC4RwsKl6gQHGYMtOvkY047kpE` |
+
+### Reference agreements — read these before drafting a new one
+
+These are Straw Hut's real house style. Do not draft from generic
+boilerplate.
+
+| Comp | File ID | Why it matters |
+|---|---|---|
+| Justin Williams — Service Agreement (Feb 2026) | `1wyrykL-fSxZhWV1Qs5zJ0ssd4K7rLZ-FOz-IWCkatdk` | Primary template. Retainer-regardless-of-delays, work-for-hire, portfolio carve-out, mutual liability cap |
+| CodeStrap — Service Agreement (Jan 2026) | `1MglHf1fMlNGV0KxeDVsNfE7n86zmCnSsN4L7S7u40_o` | Closest structural comp; validated the auto-charge payment clause |
+| BGU Agreement_Redline (Jun 2026) | `10JOxvxzWHc0rKTwqNAtwnCTK01Lup_sEv3L9cF0oK5g` | Confirms California governing law is the house default |
+| Universal / Seen on the Screen SOW | `1l7VY80fev4ZwBdzDrUqq9QdpXZcVeteH` | NBCU's paper, not ours — reference only |
+
+---
+
+## Key decisions and why
+
+- **Insurance language is verified true.** Straw Hut carries commercial
+  general liability **and** workers' compensation through **TCP Insurance /
+  Great American Insurance Co.** Confirmed by reading actual policy-renewal
+  emails in Gmail, because Ryan said: *"I don't want to say the workers comp
+  bit if it isn't true."* Do not state coverage you have not re-verified.
+- **Governing law is California.** BGU and Justin Williams both use it.
+  CodeStrap's Delaware/Denver arbitration is a one-off outlier — don't copy it.
+- **Guest-lawsuit liability sits with the client.** They own the show, direct
+  the content, and control the channels. Folded into the Ownership section as
+  a single paragraph, not a standalone indemnification block — Ryan said
+  *"don't make a big deal out of this."*
+- **Production day = 12 hours max, with a 30–60 minute break after every
+  5 hours.** ⚠️ Ryan wrote "3-60 min break"; this was read as a typo for
+  "30-60" and flagged to him, **but he never confirmed it.** Verify before
+  this language goes into another agreement.
+- **Notices and Assignment clauses were deliberately declined** for Die With
+  Zero even though they appear in CodeStrap and BGU. Ryan: *"I don't think we
+  need to worry about those last two."* Don't re-add them uninvited.
+- **Straw Hut business address:** 7201 Melrose Ave., Suite 203, Los Angeles,
+  CA 90046. The old DWZ proposal footer has 822 N. Dillon St. — that is
+  **stale**, do not reuse it.
+
+---
+
+## Environment variables
+
+**This repo has none** — no app, no build, no secrets. Work happens through
+the Claude connectors (Google Drive, Gmail), which authenticate via OAuth,
+not env vars.
+
+Env var names for the *other* Straw Hut repos are documented in their own
+`CLAUDE.md` files — `Project-management/CLAUDE.md` (Slate) and
+`Podbooster/CLAUDE.md` are the detailed ones. Never put real keys in any
+repo.
+
+---
+
+## What's broken / outstanding
+
+1. **⚠️ HIGHEST PRIORITY — a live client link is dead.** Ryan emailed Austin
+   and Lauren a link to Doc `1uKnKSW-XN400kzt2gf8jMgV-siaHxPeAbEQuojszM08`
+   on Sep 21. A later session trashed that Doc during routine versioning,
+   not knowing it had already been sent. **Their link is broken.** The Drive
+   connector has no untrash operation, so **Ryan has to restore it manually**:
+   Drive → Trash → "Straw Hut Media - Die With Zero - Podcast Services
+   Agreement" → Restore. **Still not done as of 2026-09-23.** Ask him.
+2. **The sent version is one revision behind.** Doc `1uKnKSW…` (what Pacaso
+   has) predates the final Term-language tightening. The current text lives
+   in `1nGLsgfSD7LHs6k15aEKhN3qEem9nLq0XJM8YC5CVFvE`. Decide with Ryan
+   whether Pacaso needs the update or whether it rides along in redlines.
+3. **The "3-60 min break" typo is still unconfirmed** (still open
+   2026-09-23). See above.
+4. **Flying V feed hosting is unanswered** (still open 2026-09-23). Asked who hosts the RSS and who
+   pays (Megaphone on our account vs. theirs); the answer given — "he is the
+   host" — was about Robb being the on-mic host. If hosting sits on Straw
+   Hut's Megaphone account, that's a real monthly cost inside the $2,450 and
+   the proposal doesn't mention it.
+5. **Abandoned task:** reformatting the DWZ episode template. Two attempts
+   (Docs `1OfXR5yh16OPspvTD3YwGpaXzXxppl6upkMYqob9M-wM` and
+   `1gqAe39AjlFCQvCkZDjkokYGT2gT87GuwzK5mOBDJWsY`) were both rejected as too
+   long, and Ryan called it off. Those two Docs are still sitting in Drive
+   and can be trashed — he was offered and didn't answer. Don't restart this
+   unless asked.
+
+---
+
+## Next steps
+
+- [ ] Confirm Ryan restored the trashed DWZ agreement Doc from Drive trash
+- [ ] Handle Pacaso's comments on the agreement when they come back
+- [x] Restyle the Flying V proposal to DWZ house style (done 2026-09-23,
+      Doc `1piO8KDCilp1EX5rQwgUgJMV7aSBfowQSs2wnGu-9pdc`)
+- [ ] Get the Flying V proposal in front of Robb (Ryan sends it, not Claude)
+- [ ] Answer the Flying V feed-hosting question and amend if needed
+- [ ] **Draft the Die With Zero renewal agreement** — effective Apr 1, 2027,
+      to be presented around Mar 1, 2027, before the Mar 31 Initial Term
+      expires. **Not started.** Reuse the current agreement's protective
+      structure; term length not yet decided (12 months was the leaning).
+- [ ] **Set a reminder for mid-to-late February 2027** to get that renewal
+      moving. **Never set** — the tooling for it (`send_later` /
+      `create_trigger`) is available but was not used.
+
+---
+
+## Context that's easy to lose
+
+- There is a handoff email in Ryan's inbox, subject **"Die With Zero —
+  Handoff / where things stand"**, sent Sep 21, 2026. It duplicates some of
+  the above. This file supersedes it.
+- The HTML sources for the DWZ and Flying V documents lived in session
+  scratchpads and are **gone**. The Google Docs are the source of truth for
+  those; rebuild HTML from them (using `templates/`) if a PDF is needed again.
+  **From now on, commit every proposal's HTML to `proposals/<client>/`.**
+- Git: this file first lived on `claude/tourism-podcast-pitch-olu47p` and
+  `main` has only a README. The current working branch is
+  `claude/sales-quoting-standards-wxbqx5`. Push with
+  `git push -u origin <branch>`. Don't push to `main`.

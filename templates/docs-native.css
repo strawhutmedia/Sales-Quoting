@@ -1,0 +1,21 @@
+/* Docs-native stylesheet — makes a Chromium-rendered PDF look like a plain
+   Google Doc (the Die With Zero proposal is the reference). Arial 11pt,
+   Docs default spacing, plain headings, simple bordered tables. No colours,
+   no columns, no callout boxes, no oversized type. */
+@page { size: Letter; margin: 1in; }
+html, body { margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; line-height: 1.15; color: #000; }
+p { margin: 0 0 8pt; }
+h1, h2, h3 { font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: #000; line-height: 1.15; break-after: avoid; }
+h1 { font-size: 20pt; margin: 20pt 0 6pt; }
+h2 { font-size: 16pt; margin: 18pt 0 6pt; }
+h3 { font-size: 14pt; margin: 16pt 0 4pt; }
+ul, ol { margin: 0 0 8pt; padding-left: 24pt; }
+li { margin: 0 0 2pt; }
+table { border-collapse: collapse; width: 100%; margin: 0 0 8pt; break-inside: avoid; }
+th, td { border: 1px solid #000; padding: 5pt; vertical-align: top; text-align: left; font-size: 11pt; }
+th { font-weight: bold; }
+tr { break-inside: avoid; }
+em { font-style: italic; }
+.sig { break-inside: avoid; margin-top: 14pt; }
+.sig p { margin: 0 0 6pt; }
