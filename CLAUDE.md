@@ -178,10 +178,10 @@ was flagged as the strongest lead in his batch ($5k+/mo marketing budget).
 | DWZ — original proposal (Sep 10, 2026) — **⭐ house-style standard for all proposals** | `15d24sVuf9zk96bsEakHx71uk1j0OrYVRR1elmnYn500` |
 | Flying V Group — proposal (**current**, built from the DWZ docx 2026-09-23, in-house tier: theme music included, no production manager, no scheduling) | `1Gn7ya50DSoA9a8RG8C6tQX9pUswH3CK5vaFVVcq3cvk` |
 
+| DWZ — brainstorm episode template + book outline (Ryan's original) | `1kl5_Rq7fW0HaKr26vwC4RwsKl6gQHGYMtOvkY047kpE` |
+
 Superseded and **trashed**: both earlier Flying V proposal versions, including
 `1iU457UVSsTSjUGIpV-Bj9f3CnOHACSDxTnd36Tq7eCc`. Don't reference them.
-
-| DWZ — brainstorm episode template + book outline (Ryan's original) | `1kl5_Rq7fW0HaKr26vwC4RwsKl6gQHGYMtOvkY047kpE` |
 
 Superseded but **NOT trashed**. Ryan was sent these links on 2026-09-23 and
 may have shared them, so ask before trashing:
