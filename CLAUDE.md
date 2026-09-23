@@ -39,30 +39,39 @@ Owner: **Ryan Tillotson**, Founder & CEO (`ryan@strawhutmedia.com`).
 ## ⭐ HOUSE STYLE — the Die With Zero proposal is the standard (set 2026-09-23)
 
 **Every client proposal is modelled on the DWZ proposal, Doc
-`15d24sVuf9zk96bsEakHx71uk1j0OrYVRR1elmnYn500`.** Read it before drafting.
+`15d24sVuf9zk96bsEakHx71uk1j0OrYVRR1elmnYn500`.** Ryan wants new proposals
+"as close to that as possible."
 
-- **Arial 11pt, plain Google Docs headings** (Heading 1/2, bold, black). Body
-  is ordinary paragraphs and bullet lists.
-- **No design flourishes:** no colours, no oversized/display type, no callout
-  or shaded boxes, no multi-column layouts, no cover page.
-- Tables only where the content really is a table (cost components, budgets):
-  plain 1px black borders.
-- **Signature blocks are stacked `By: / Name: / Title: / Date:` lines**, one
-  block per party (Straw Hut first, Ryan's name and title pre-filled). No
-  side-by-side columns.
-- Section order (DWZ): title block (kicker, show name, italic subtitle,
-  Prepared for / Prepared by / Date, one-sentence italic summary) → Program
-  Details → What's Included → Your Team → Investment & Costs → (engagement-
-  specific sections) → Next Steps → Acceptance → Ryan's sign-off. Leave out
-  sections that don't apply. Don't add new kinds of section.
-- ⚠️ The DWZ proposal's footer has the **stale 822 N. Dillon St. address**.
-  Copy the layout, but use 7201 Melrose (see Key decisions).
+What the DWZ look actually is (measured from its export 2026-09-23. An
+earlier note here said "plain Arial 11pt", which was **wrong**):
+- Georgia serif for the 30pt title, italic subtitle, 16pt H1s and 11.5pt gold
+  (`#8a6d3b`) H2s with a thin beige rule under each. Arial 10.5pt body text
+  in `#1a1a1a`, single line spacing.
+- Small gold all-caps kicker above the title. "Prepared for / by / Date" in
+  9.5pt grey.
+- En-dash (–) bullets.
+- Tables: dark `#1a1a1a` header row with white bold text, cream `#f7f4ef`
+  label cells, beige borders.
+- Stacked `By: / Name: / Title: / Date:` signature blocks. A page footer that
+  reads "<CLIENT> PODCAST · STRAW HUT MEDIA PROPOSAL · PAGE n".
+- ⚠️ The DWZ footer address (822 N. Dillon St.) is stale. Use 7201 Melrose.
 
-**Why:** big headings, columns and boxes make a document *look* long. The
-Flying V proposal came to **1,125 words and 3 pages in Docs styling, but 1,182
-words and 6 pages in the designed styling**, and Ryan read the designed one as
-"too long". When length is the complaint, the usual cause is the styling, not
-the word count.
+**How to reproduce it exactly: build from DWZ's own .docx, not from HTML.**
+`tools/build_from_dwz.py` has the method: export DWZ as .docx
+(`download_file_content`, docx MIME), deep-copy its paragraphs and tables as
+prototypes, swap only the text, then upload the .docx with `create_file`
+(it converts to a Google Doc). Verify by exporting the new Doc as HTML and
+comparing fonts, sizes and colours against DWZ.
+
+**Don't use an HTML upload for this.** Drive's HTML import was tested
+2026-09-23 and it rounds every half-point size down (10.5 → 10), turns every
+list into round bullets, turns paragraph rules into grey `<hr>` lines, and
+ignores class-based bold. The .docx route keeps all of that.
+
+**Why:** the Flying V proposal came to 1,125 words and 3 pages in a compact
+style, but 1,182 words and 6 pages in the looser, oversized "designed"
+style. Ryan read the 6-page one as "too long", so the styling makes the
+difference, not the word count.
 
 ## How documents actually get produced
 
@@ -151,8 +160,13 @@ was flagged as the strongest lead in his batch ($5k+/mo marketing budget).
 - **Format:** audio and video. Host is Robb.
 - **Recording:** in-house at Flying V offices; they send us the media
 - **Production begins** Nov 1, 2026; **launch** Jan 4, 2027
-- **Transition:** Flying V shoots *and releases* the first 3 episodes
-  themselves. Straw Hut takes over at episode 4.
+- **Transition (corrected by Ryan 2026-09-23):** Flying V *shoots* the first
+  3 episodes, but Straw Hut *produces* them from the start. There's a lot of
+  hands-on work helping them produce. Straw Hut never shoots on the in-house
+  tier. The proposal's Startup & Transition section had this wrong; Ryan is
+  pasting in the fix himself.
+- **In-house tier scope:** original theme music IS included. No dedicated
+  production manager and no shoot/guest scheduling (Flying V does both).
 - **Payment:** card or ACH on file, charged at the top of each month
 - **Studio upgrade** offered at $4,350/mo (Premium)
 - **Show title:** TBD, to be developed together
@@ -167,10 +181,17 @@ was flagged as the strongest lead in his batch ($5k+/mo marketing budget).
 | DWZ — Podcast Services Agreement (current, has final Term language) | `1nGLsgfSD7LHs6k15aEKhN3qEem9nLq0XJM8YC5CVFvE` |
 | DWZ — agreement version Ryan actually emailed to Pacaso | `1uKnKSW-XN400kzt2gf8jMgV-siaHxPeAbEQuojszM08` ⚠️ **in Drive trash — see below** |
 | DWZ — original proposal (Sep 10, 2026) — **⭐ house-style standard for all proposals** | `15d24sVuf9zk96bsEakHx71uk1j0OrYVRR1elmnYn500` |
-| Flying V Group — proposal (current, restyled to DWZ house style 2026-09-23; Drive title is `Flying_V_Group_Podcast_Proposal` with underscores) | `1piO8KDCilp1EX5rQwgUgJMV7aSBfowQSs2wnGu-9pdc` |
+| Flying V Group — proposal (**current**, built from the DWZ docx 2026-09-23, in-house tier: theme music included, no production manager, no scheduling) | `1Gn7ya50DSoA9a8RG8C6tQX9pUswH3CK5vaFVVcq3cvk` |
 
 Superseded and **trashed**: both earlier Flying V proposal versions, including
 `1iU457UVSsTSjUGIpV-Bj9f3CnOHACSDxTnd36Tq7eCc`. Don't reference them.
+
+Superseded but **NOT trashed**. Ryan was sent these links on 2026-09-23 and
+may have shared them, so ask before trashing:
+`1piO8KDCilp1EX5rQwgUgJMV7aSBfowQSs2wnGu-9pdc` (Arial version),
+`1-9dJFp8Uo0Ao1MTpHIHoOlMjnydO0Fgc4RuZH3rumSE` (HTML-import attempt),
+`1PfVCbtwdY7xqGVAJ3y8llDt1nnPsNfIfuTd3NxRtrhY` (had the "absence of
+episodes" sentence).
 | DWZ — brainstorm episode template + book outline (Ryan's original) | `1kl5_Rq7fW0HaKr26vwC4RwsKl6gQHGYMtOvkY047kpE` |
 
 ### Reference agreements — read these before drafting a new one
