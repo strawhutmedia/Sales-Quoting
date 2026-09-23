@@ -79,27 +79,22 @@ The Google Drive connector **cannot edit a Doc in place.** Every revision
 means: create a brand-new Doc, then trash the old one (subject to rule 4).
 Each new Doc gets a new ID and URL, so any link already sent goes stale.
 
-The working pipeline — **one HTML source, one stylesheet, for both outputs**:
+The working pipeline for a **proposal** (see House Style above):
 
-1. Copy `templates/proposal.html` (skeleton in DWZ order) and fill it in. It
-   links `templates/docs-native.css`, which makes Chromium output look like a
-   Google Doc: Arial 11pt, line-height 1.15, headings 20/16/14pt, 1-inch
-   margins, Letter. **Don't restyle it per client.** Commit the filled-in
-   source to `proposals/<client>/` so it outlives the session.
-2. Render to PDF with headless Chromium (the version folder changes, so glob it):
-   ```
-   $(ls -d /opt/pw-browsers/chromium*/chrome-linux/chrome | head -1) --headless \
-     --disable-gpu --no-sandbox --print-to-pdf=out.pdf --no-pdf-header-footer \
-     "file:///abs/path/in.html"
-   ```
-3. **Verify the PDF**: `pip install pypdfium2 pillow`, extract the text to
-   check the key phrases are there, and **render the pages to PNG and look at
-   them**. Orphaned headings, tables split mid-row and half-empty pages only
-   show up when you look. The stylesheet already keeps tables, rows and
-   signature blocks whole.
-4. Create the Google Doc from the same HTML. The PDF and the Doc should look
-   alike and have about the same page count. If they don't, the HTML is using
-   something Docs strips (columns, flex, positioned boxes); remove it.
+1. Export the DWZ proposal as .docx and run `tools/build_from_dwz.py`
+   (edit its text blocks for the new client; it clones DWZ's own paragraphs,
+   tables and footer, so the styling matches exactly).
+2. Upload the .docx with `create_file` (base64, docx MIME). Drive converts
+   it to a Google Doc.
+3. **Verify**: export the new Doc as `text/html`, check fonts, sizes and
+   colours against DWZ's export, render it with headless Chromium, and look
+   at the pages (`pip install pypdfium2 pillow`). LibreOffice in the
+   sandbox can't open these .docx files, so don't rely on it.
+4. For a PDF, export the finished Google Doc as PDF so the two match.
+
+`templates/docs-native.css` + `templates/proposal.html` are a plain Arial
+fallback from before the DWZ style was measured. **Don't use them for
+client proposals.**
 
 ### Formatting lessons Ryan has already given
 
@@ -186,13 +181,14 @@ was flagged as the strongest lead in his batch ($5k+/mo marketing budget).
 Superseded and **trashed**: both earlier Flying V proposal versions, including
 `1iU457UVSsTSjUGIpV-Bj9f3CnOHACSDxTnd36Tq7eCc`. Don't reference them.
 
+| DWZ — brainstorm episode template + book outline (Ryan's original) | `1kl5_Rq7fW0HaKr26vwC4RwsKl6gQHGYMtOvkY047kpE` |
+
 Superseded but **NOT trashed**. Ryan was sent these links on 2026-09-23 and
 may have shared them, so ask before trashing:
 `1piO8KDCilp1EX5rQwgUgJMV7aSBfowQSs2wnGu-9pdc` (Arial version),
 `1-9dJFp8Uo0Ao1MTpHIHoOlMjnydO0Fgc4RuZH3rumSE` (HTML-import attempt),
 `1PfVCbtwdY7xqGVAJ3y8llDt1nnPsNfIfuTd3NxRtrhY` (had the "absence of
 episodes" sentence).
-| DWZ — brainstorm episode template + book outline (Ryan's original) | `1kl5_Rq7fW0HaKr26vwC4RwsKl6gQHGYMtOvkY047kpE` |
 
 ### Reference agreements — read these before drafting a new one
 
@@ -281,7 +277,10 @@ repo.
 - [ ] Confirm Ryan restored the trashed DWZ agreement Doc from Drive trash
 - [ ] Handle Pacaso's comments on the agreement when they come back
 - [x] Restyle the Flying V proposal to DWZ house style (done 2026-09-23,
-      Doc `1piO8KDCilp1EX5rQwgUgJMV7aSBfowQSs2wnGu-9pdc`)
+      Doc `1Gn7ya50DSoA9a8RG8C6tQX9pUswH3CK5vaFVVcq3cvk`)
+- [ ] Ryan pastes the corrected "Startup & Transition" text (Straw Hut
+      produces the first 3 episodes, Flying V shoots them) into that Doc.
+      The Doc as built still has the old wording.
 - [ ] Get the Flying V proposal in front of Robb (Ryan sends it, not Claude)
 - [ ] Answer the Flying V feed-hosting question and amend if needed
 - [ ] **Draft the Die With Zero renewal agreement** — effective Apr 1, 2027,
@@ -299,10 +298,8 @@ repo.
 - There is a handoff email in Ryan's inbox, subject **"Die With Zero —
   Handoff / where things stand"**, sent Sep 21, 2026. It duplicates some of
   the above. This file supersedes it.
-- The HTML sources for the DWZ and Flying V documents lived in session
-  scratchpads and are **gone**. The Google Docs are the source of truth for
-  those; rebuild HTML from them (using `templates/`) if a PDF is needed again.
-  **From now on, commit every proposal's HTML to `proposals/<client>/`.**
+- The Google Docs are the source of truth for proposal text. The Flying V
+  build script (with its text) is committed as `tools/build_from_dwz.py`.
 - Git: this file first lived on `claude/tourism-podcast-pitch-olu47p` and
   `main` has only a README. The current working branch is
   `claude/sales-quoting-standards-wxbqx5`. Push with
