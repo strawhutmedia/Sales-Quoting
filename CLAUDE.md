@@ -177,8 +177,13 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
 - **Growth only, no publishing:** landing page per episode + per-episode
   audience targeting for RSS downloads; matching YouTube growth for
   views/subscribers. We do NOT publish episodes or manage uploads.
-- **$2,000/month total = $925 Straw Hut fee + $1,075 promotion budget.**
-  Can increase if it works.
+- **$2,000/month total = $925 Straw Hut fee + $1,075 promotion budget**
+  ($650 RSS / $425 YouTube). The fee is ~6.2 hrs at Straw Hut's $150/hr
+  internal rate. The promotion budget is expected to grow, and **the fee
+  does NOT change with budget**.
+- **Scope cap: up to 4 RSS + 4 YouTube episodes promoted per month.**
+  More episodes per month = a modest fee increase (1–2 more hours), agreed
+  in advance. The proposal says so.
 - **Geo:** primary focus on native-English countries (US, CA, UK, IE, AU,
   NZ), plus a worldwide test.
 - **Term:** 6 months, Oct 1, 2026 → Mar 31, 2027. Card/ACH authorization
@@ -187,11 +192,12 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
 - **No guarantees, by Ryan's instruction.** The proposal says plainly that
   it promises no specific download, view or subscriber numbers. Never add
   outcome promises to anything for this client.
-- Proposal Doc (**current, 2 pages**, DWZ house style):
-  `1H7kxceWFsOF5HFbHZMCsAAa2PO64Gw6jie5n3rhMtjo`, built with
-  `tools/build_if_you_please.py`. The earlier 3-page version
-  `1Jecf-Q2B-5LdxrTDDMAhHFzMs8fIQ2gM0n4YqRoPyx4` is superseded but **not
-  trashed**, because Ryan had its link. Ask before trashing it.
+- Proposal Doc (**current, 2 pages**, DWZ house style, includes the 4+4 cap
+  and the budget split): `1XYMtyyNRo74f2d2JDmXK_yLhkOG2j5PUuZEPqsP_qLk`,
+  built with `tools/build_if_you_please.py`. Superseded but **not
+  trashed** (Ryan had these links, so ask first):
+  `1H7kxceWFsOF5HFbHZMCsAAa2PO64Gw6jie5n3rhMtjo` (2-page, no cap) and
+  `1Jecf-Q2B-5LdxrTDDMAhHFzMs8fIQ2gM0n4YqRoPyx4` (3-page).
 - Karen's title on the signature block is left blank (unknown).
 - Lesson: hand-copying a ~15KB base64 docx into `create_file` can fail with
   "invalid argument". Print it in 6,000-character chunks and copy each one

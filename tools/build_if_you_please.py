@@ -49,7 +49,8 @@ bullets(['Show: If You Please, Himan Brown’s Radio Mystery Theater (CUNY TV)',
     'Term: six (6) months, October 1, 2026 through March 31, 2027',
     'Scope: promotion and growth only — the show’s team continues to publish all episodes'])
 p(14); p(15, "What's Included")
-bullets(['A dedicated landing page for every episode, driving listens that count toward RSS downloads',
+bullets(['Up to four (4) episodes promoted per channel each month: four for the RSS feed and four on YouTube',
+    'A dedicated landing page for each promoted episode, driving listens that count toward RSS downloads',
     'Episode-by-episode audience targeting: fans of radio drama, mystery, and old-time radio',
     'A matching YouTube program, promoting episodes to viewers likely to watch and subscribe',
     'Primary focus on native English-speaking countries, plus a worldwide test',
@@ -59,10 +60,10 @@ p(35, 'Investment & Costs')
 table(37, [
     ['Cost Component', 'Details'],
     ['Straw Hut Media Fee', '$925 / month. Landing pages, targeting, campaign management, and reporting.'],
-    ['Promotion Budget', '$1,075 / month, spent on paid promotion across RSS and YouTube.'],
+    ['Promotion Budget', '$1,075 / month, spent on paid promotion: $650 for the RSS feed and $425 for YouTube.'],
     ['Monthly Total', '$2,000 / month, billed at the start of each month from October 1, 2026.']])
 p(39, 'Monthly Total: ', '$2,000 / month', '  ·  billed monthly, six-month term')
-p(16, 'This is a starting budget; if results warrant it, the promotion budget can increase by mutual agreement.')
+p(16, 'This is a starting budget; if results warrant it, the promotion budget can increase by mutual agreement without changing Straw Hut Media’s fee. Promoting more than four episodes per channel in a month would add a modest fee increase, agreed in advance.')
 p(27, 'Paid promotion is test-and-learn, and response varies by episode and market. We will manage the budget carefully and report openly, but this proposal does not promise specific download, view, or subscriber numbers.')
 p(57, 'Next Steps')
 p(58, 'Once signed, we’ll send a short credit card / ACH authorization form and begin setup for an October 1 start.')
