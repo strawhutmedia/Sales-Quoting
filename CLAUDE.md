@@ -167,6 +167,32 @@ was flagged as the strongest lead in his batch ($5k+/mo marketing budget).
 - **Show title:** TBD, to be developed together
 - **Day-to-day contacts:** Robb and his team, names TBD
 
+### If You Please — StardustBlue (Karen A. Brown) — added 2026-09-24
+
+Show: **If You Please, Himan Brown's Radio Mystery Theater** (CUNY TV,
+RSS `https://tv.cuny.edu/podcasts/ifyouplease.xml`) + the **Radio Drama
+Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
+`stardustbluepr@gmail.com`) hires us through StardustBlue.
+
+- **Growth only, no publishing:** landing page per episode + per-episode
+  audience targeting for RSS downloads; matching YouTube growth for
+  views/subscribers. We do NOT publish episodes or manage uploads.
+- **$2,000/month total = $925 Straw Hut fee + $1,075 promotion budget.**
+  Can increase if it works.
+- **Geo:** primary focus on native-English countries (US, CA, UK, IE, AU,
+  NZ), plus a worldwide test.
+- **Term:** 6 months, Oct 1, 2026 → Mar 31, 2027. Card/ACH authorization
+  form follows the signed proposal. **No long-form agreement: the proposal
+  is the contract.**
+- **No guarantees, by Ryan's instruction.** The proposal says plainly that
+  it promises no specific download, view or subscriber numbers. Never add
+  outcome promises to anything for this client.
+- Proposal Doc: `1Jecf-Q2B-5LdxrTDDMAhHFzMs8fIQ2gM0n4YqRoPyx4` (built with
+  `tools/build_if_you_please.py`). It renders at **3 pages**: the last two
+  sign-off lines spill onto page 3. A 2-page rebuild (three spacer lines
+  removed) was made, but the Drive upload failed twice with "invalid
+  argument"; probably an error when the 15KB base64 was copied by hand.
+
 ---
 
 ## Document inventory (Google Drive — all private, none shared)
