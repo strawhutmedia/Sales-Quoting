@@ -41,34 +41,31 @@ p(3, 'Prepared for: ', 'StardustBlue / Karen A. Brown')
 p(4, 'Prepared by: ', 'Ryan Tillotson, Founder & CEO, Straw Hut Media')
 p(5, 'Date: ', 'September 24, 2026')
 p(6)
-p(7, "A focused, paid audience-growth program for If You Please and the Radio Drama Network YouTube channel — reaching the right listeners for each episode, and turning them into downloads, views, and subscribers.")
+p(7, "A focused, paid audience-growth program for If You Please and the Radio Drama Network YouTube channel — reaching the right listeners for every episode.")
 p(8); p(9, 'Program Details')
 bullets(['Show: If You Please, Himan Brown’s Radio Mystery Theater (CUNY TV)',
     'Channels grown: the podcast RSS feed and the Radio Drama Network YouTube channel',
     'Program begins: October 1, 2026',
     'Term: six (6) months, October 1, 2026 through March 31, 2027',
-    'Scope: promotion and audience growth only. Episodes continue to be produced and published by the show’s current team; Straw Hut Media does not publish or manage uploads.'])
+    'Scope: promotion and growth only — the show’s team continues to publish all episodes'])
 p(14); p(15, "What's Included")
-p(16, "Each month's work covers both channels:")
-bullets(['A dedicated landing page for every episode, built to play the episode and drive listens that count toward the show’s RSS downloads',
-    'Episode-by-episode audience research and targeting, reaching listeners of radio drama, mystery, old-time radio, and classic audio storytelling',
-    'Paid promotion that sends those audiences to each episode’s landing page',
-    'A matching YouTube growth program: promoting episodes to viewers most likely to watch and subscribe to the Radio Drama Network channel',
-    'Geographic testing: a primary focus on native English-speaking countries (the U.S., Canada, the U.K., Ireland, Australia, and New Zealand), alongside a worldwide test to find any strong audiences beyond them',
-    'Ongoing optimization: shifting budget toward the episodes, audiences, and countries that perform best',
-    'A monthly summary of spend and results for both channels'])
+bullets(['A dedicated landing page for every episode, driving listens that count toward RSS downloads',
+    'Episode-by-episode audience targeting: fans of radio drama, mystery, and old-time radio',
+    'A matching YouTube program, promoting episodes to viewers likely to watch and subscribe',
+    'Primary focus on native English-speaking countries, plus a worldwide test',
+    'Ongoing optimization toward the best-performing episodes, audiences, and countries',
+    'A monthly summary of spend and results'])
 p(35, 'Investment & Costs')
-p(36, 'The program runs on a single monthly amount, split between Straw Hut Media’s fee and the promotion budget itself.')
 table(37, [
     ['Cost Component', 'Details'],
-    ['Straw Hut Media Fee', '$925 / month. Covers landing pages, audience research and targeting, campaign management and optimization, and monthly reporting.'],
-    ['Promotion Budget', '$1,075 / month, spent on paid promotion for the show across the RSS and YouTube programs.'],
+    ['Straw Hut Media Fee', '$925 / month. Landing pages, targeting, campaign management, and reporting.'],
+    ['Promotion Budget', '$1,075 / month, spent on paid promotion across RSS and YouTube.'],
     ['Monthly Total', '$2,000 / month, billed at the start of each month from October 1, 2026.']])
 p(39, 'Monthly Total: ', '$2,000 / month', '  ·  billed monthly, six-month term')
-p(16, 'This is a starting budget. If the results warrant it, we can increase the promotion budget at any point by mutual agreement.')
-p(27, 'Paid promotion is an ongoing test-and-learn process, and audience response varies by episode, platform, and market. Straw Hut Media will manage the budget carefully and report openly on what it delivers, but this proposal does not promise any specific number of downloads, views, or subscribers.')
+p(16, 'This is a starting budget; if results warrant it, the promotion budget can increase by mutual agreement.')
+p(27, 'Paid promotion is test-and-learn, and response varies by episode and market. We will manage the budget carefully and report openly, but this proposal does not promise specific download, view, or subscriber numbers.')
 p(57, 'Next Steps')
-p(58, 'Once this proposal is signed, we’ll send a short authorization form to keep a credit card or bank account (ACH) on file for the monthly charge, and begin setup so the program is live on October 1.')
+p(58, 'Once signed, we’ll send a short credit card / ACH authorization form and begin setup for an October 1 start.')
 p(59, 'Acceptance')
 p(60, 'By signing below, both parties agree to move forward on the terms outlined in this proposal.')
 p(61)

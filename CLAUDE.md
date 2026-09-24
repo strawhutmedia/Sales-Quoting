@@ -187,11 +187,15 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
 - **No guarantees, by Ryan's instruction.** The proposal says plainly that
   it promises no specific download, view or subscriber numbers. Never add
   outcome promises to anything for this client.
-- Proposal Doc: `1Jecf-Q2B-5LdxrTDDMAhHFzMs8fIQ2gM0n4YqRoPyx4` (built with
-  `tools/build_if_you_please.py`). It renders at **3 pages**: the last two
-  sign-off lines spill onto page 3. A 2-page rebuild (three spacer lines
-  removed) was made, but the Drive upload failed twice with "invalid
-  argument"; probably an error when the 15KB base64 was copied by hand.
+- Proposal Doc (**current, 2 pages**, DWZ house style):
+  `1H7kxceWFsOF5HFbHZMCsAAa2PO64Gw6jie5n3rhMtjo`, built with
+  `tools/build_if_you_please.py`. The earlier 3-page version
+  `1Jecf-Q2B-5LdxrTDDMAhHFzMs8fIQ2gM0n4YqRoPyx4` is superseded but **not
+  trashed**, because Ryan had its link. Ask before trashing it.
+- Karen's title on the signature block is left blank (unknown).
+- Lesson: hand-copying a ~15KB base64 docx into `create_file` can fail with
+  "invalid argument". Print it in 6,000-character chunks and copy each one
+  exactly.
 
 ---
 
