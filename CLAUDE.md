@@ -205,6 +205,30 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
 
 ---
 
+## Contractor agreements (not client-facing sales docs, but they live here too)
+
+### Sydney Fuller — Contract Producer — added 2026-09-25
+
+- **1099 independent contractor** (Ryan chose 1099 over W-2 knowing the
+  California AB5 risk), **flat $1,733/month** (≈20 hrs/wk at $20/hr),
+  **3-month trial Oct 1 → Dec 31, 2026** (start date assumed, not confirmed).
+  Primarily producer on CodeStrap, plus other projects.
+- Doc (DWZ house style, 3 pages): `16Wc1mJt21L3zHhKAPG7eJkM4roxYJ_3Oyy5dn0bAGd0`,
+  built with `tools/build_sydney_fuller.py`. Ryan sends it himself.
+- Ryan wanted her to clearly understand what "contractor" means, so the doc
+  has a full Independent Contractor Relationship section plus a signed
+  **Contractor Acknowledgment** list (no withholding, no benefits, 7-day
+  termination, chance to consult an advisor).
+- Language is lifted from Straw Hut's own past contractor docs: Xavier Thomas
+  (Studio Manager, `1hovIXk4p7LqoM0xmLArxjMbs4621wTA98sY5ghVqAo4`), Robert
+  Barnes (freelance editor, `15JDAOTPqp82iyRBBim9seBcPDVjgJsaRfvXOaW1WEM4`),
+  and the contractor NDA used for Ariana Nasseri / Ryan Alva
+  (`1znYoL4IY4zlvX0m-jOo3TLZO53ca4_QxR__cRhJdfjA`). **Reuse these for any
+  future contractor.**
+- Deliberately NOT copied from the NDA: the 12-month client non-solicit
+  (void in California under B&P 16600). The Doc says she won't use
+  confidential info to solicit clients, which is enforceable.
+
 ## Document inventory (Google Drive — all private, none shared)
 
 | Document | File ID |
