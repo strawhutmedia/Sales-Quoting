@@ -215,13 +215,15 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
   minimum, $1,750/month maximum** (87.5 hrs; more only with Ryan's written
   approval). **3-month trial Oct 1 → Dec 31, 2026** (start date assumed,
   not confirmed).
+- **No invoices (Ryan, 2026-09-25):** she fills in the tracking sheet each
+  month and Straw Hut pays from the hours there, within 10 days of month end.
 - **Hours and tasks are tracked in a spreadsheet**:
   `1gdxDyJqwCpnHvxFTxga5I1FopApV8U5zyCED-YnNoIk` ("Sydney Fuller - Hours &
   Tasks Tracker": Date / Client-Show / Task / Hours / Notes). Private; Ryan
   shares it with her.
 - **Two-step process (Ryan, 2026-09-25):** she first signs a **1-page
   Contractor Offer** (terms only), then gets the long-form agreement.
-  - Offer Doc (1 page, current): `1XY4IfxP46M4Qc1mBHb9IpGm4Cc5JgrE_s0GGJfcTfNs`,
+  - Offer Doc (1 page, current): `1_zoBk8ijLsLIN0qW4RxGiWEy4D7Pq7TbLf3yx_3OzOQ`,
     built with `tools/build_sydney_fuller_offer.py`. Earlier offer drafts
     were trashed (never sent).
   - ⚠️ The long-form Doc below is stale: it says **flat $1,733/month** and

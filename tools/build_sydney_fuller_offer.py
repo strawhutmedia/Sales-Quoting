@@ -44,10 +44,10 @@ table(37, [['Term', 'Detail'],
     ['Rate', '$20 per hour'],
     ['Monthly minimum', '$1,000 per month, even if fewer hours are needed'],
     ['Monthly maximum', '$1,750 per month (87.5 hours); more only with Ryan’s written approval'],
-    ['Paid', 'Within 10 days of your monthly invoice']])
+    ['Paid', 'Within 10 days after each month ends, based on the hours in your tracking spreadsheet (no invoice needed)']])
 p(28, 'What You Need to Do')
 bullets(['Track your hours and tasks as you work in the shared Straw Hut tracking spreadsheet',
-    'Send an invoice at the end of each month for your logged hours',
+    'Keep the spreadsheet up to date by the last day of each month; we pay from it',
     'Send a completed Form W-9 before your first payment',
     'Keep all client and show information confidential'])
 p(28, 'What “Independent Contractor” Means')
