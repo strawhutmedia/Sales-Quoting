@@ -209,11 +209,19 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
 
 ### Sydney Fuller — Contract Producer — added 2026-09-25
 
-- **1099 independent contractor** (Ryan chose 1099 over W-2 knowing the
-  California AB5 risk), **flat $1,733/month** (≈20 hrs/wk at $20/hr),
-  **3-month trial Oct 1 → Dec 31, 2026** (start date assumed, not confirmed).
-  Primarily producer on CodeStrap, plus other projects.
-- Doc (DWZ house style, 3 pages): `16Wc1mJt21L3zHhKAPG7eJkM4roxYJ_3Oyy5dn0bAGd0`,
+- **1099 independent contractor**, **$20/hr, logged hours, $1,000/month
+  minimum, $1,733/month maximum** (≈86 hrs; more only with Ryan's written
+  approval). Changed 2026-09-25 from a flat $1,733/mo. **3-month trial
+  Oct 1 → Dec 31, 2026** (start date assumed, not confirmed). Primarily
+  producer on CodeStrap, plus other projects.
+- **Two-step process (Ryan, 2026-09-25):** she first signs a **1-page
+  Contractor Offer** (terms only), then gets the long-form agreement.
+  - Offer Doc (1 page): `1fUUWdLX4cabds60QF7KYnLhNjzMDJs2AKLa3mRbERVU`,
+    built with `tools/build_sydney_fuller_offer.py`.
+  - ⚠️ The long-form Doc below still says **flat $1,733/month**. Rebuild it
+    with the hourly terms (and anything she negotiates) **after she signs the
+    offer**, before it goes to her.
+- Long-form agreement Doc (DWZ house style, 3 pages): `16Wc1mJt21L3zHhKAPG7eJkM4roxYJ_3Oyy5dn0bAGd0`,
   built with `tools/build_sydney_fuller.py`. Ryan sends it himself.
 - Ryan wanted her to clearly understand what "contractor" means, so the doc
   has a full Independent Contractor Relationship section plus a signed
