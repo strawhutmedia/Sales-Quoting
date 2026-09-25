@@ -207,20 +207,26 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
 
 ## Contractor agreements (not client-facing sales docs, but they live here too)
 
-### Sydney Fuller — Contract Producer — added 2026-09-25
+### Sydney Fuller — Producing Consultant / Jr. Producer — added 2026-09-25
 
+- Title (Ryan): **Producing Consultant / Jr. Producer**, focused on
+  **CodeStrap (aka Code x Connor)**, plus other projects.
 - **1099 independent contractor**, **$20/hr, logged hours, $1,000/month
-  minimum, $1,733/month maximum** (≈86 hrs; more only with Ryan's written
-  approval). Changed 2026-09-25 from a flat $1,733/mo. **3-month trial
-  Oct 1 → Dec 31, 2026** (start date assumed, not confirmed). Primarily
-  producer on CodeStrap, plus other projects.
+  minimum, $1,750/month maximum** (87.5 hrs; more only with Ryan's written
+  approval). **3-month trial Oct 1 → Dec 31, 2026** (start date assumed,
+  not confirmed).
+- **Hours and tasks are tracked in a spreadsheet**:
+  `1gdxDyJqwCpnHvxFTxga5I1FopApV8U5zyCED-YnNoIk` ("Sydney Fuller - Hours &
+  Tasks Tracker": Date / Client-Show / Task / Hours / Notes). Private; Ryan
+  shares it with her.
 - **Two-step process (Ryan, 2026-09-25):** she first signs a **1-page
   Contractor Offer** (terms only), then gets the long-form agreement.
-  - Offer Doc (1 page): `1fUUWdLX4cabds60QF7KYnLhNjzMDJs2AKLa3mRbERVU`,
-    built with `tools/build_sydney_fuller_offer.py`.
-  - ⚠️ The long-form Doc below still says **flat $1,733/month**. Rebuild it
-    with the hourly terms (and anything she negotiates) **after she signs the
-    offer**, before it goes to her.
+  - Offer Doc (1 page, current): `1XY4IfxP46M4Qc1mBHb9IpGm4Cc5JgrE_s0GGJfcTfNs`,
+    built with `tools/build_sydney_fuller_offer.py`. Earlier offer drafts
+    were trashed (never sent).
+  - ⚠️ The long-form Doc below is stale: it says **flat $1,733/month** and
+    "Contract Producer". Rebuild it with the offer's terms (and anything she
+    negotiates) **after she signs the offer**, before it goes to her.
 - Long-form agreement Doc (DWZ house style, 3 pages): `16Wc1mJt21L3zHhKAPG7eJkM4roxYJ_3Oyy5dn0bAGd0`,
   built with `tools/build_sydney_fuller.py`. Ryan sends it himself.
 - Ryan wanted her to clearly understand what "contractor" means, so the doc
