@@ -226,11 +226,15 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
   - Offer Doc (1 page, current): `1_zoBk8ijLsLIN0qW4RxGiWEy4D7Pq7TbLf3yx_3OzOQ`,
     built with `tools/build_sydney_fuller_offer.py`. Earlier offer drafts
     were trashed (never sent).
-  - ⚠️ The long-form Doc below is stale: it says **flat $1,733/month** and
-    "Contract Producer". Rebuild it with the offer's terms (and anything she
-    negotiates) **after she signs the offer**, before it goes to her.
-- Long-form agreement Doc (DWZ house style, 3 pages): `16Wc1mJt21L3zHhKAPG7eJkM4roxYJ_3Oyy5dn0bAGd0`,
-  built with `tools/build_sydney_fuller.py`. Ryan sends it himself.
+  - **Sydney agreed to the offer terms (Ryan, 2026-09-27).**
+- Long-form agreement Doc (**current**, DWZ house style, 3 pages, built
+  2026-09-27 with the offer's hourly terms): `1_au29sJnIlQ_bOrW3jTajM9yLZHcDAUgOMTkfABWsRg`,
+  built with `tools/build_sydney_fuller.py`. The old flat-$1,733 version
+  was trashed (never sent). Ryan sends it himself.
+  - Build tip: dropping `word/theme/theme1.xml` + `docProps/core.xml` from
+    the .docx (and their rels/content-type entries) cuts the base64 from
+    ~16K to ~13K chars, making the `create_file` paste far less error-prone.
+    Drive converts it fine.
 - Ryan wanted her to clearly understand what "contractor" means, so the doc
   has a full Independent Contractor Relationship section plus a signed
   **Contractor Acknowledgment** list (no withholding, no benefits, 7-day
