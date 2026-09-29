@@ -217,10 +217,15 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
   not confirmed).
 - **No invoices (Ryan, 2026-09-25):** she fills in the tracking sheet each
   month and Straw Hut pays from the hours there, within 10 days of month end.
-- **Hours and tasks are tracked in a spreadsheet**:
-  `1gdxDyJqwCpnHvxFTxga5I1FopApV8U5zyCED-YnNoIk` ("Sydney Fuller - Hours &
-  Tasks Tracker": Date / Client-Show / Task / Hours / Notes). Private; Ryan
-  shares it with her.
+- **Hours are tracked in "Sydney // Straw Hut Hours"**
+  `1Ip5AyUtoc-b9LycHkTk5WuIVuLoI4rmbCkIfDZ8qH7g`, built 2026-09-29 as an
+  exact copy of Ariana's layout ("Ariana // Straw Hut Hours",
+  `168orxgLoYDRbgTNHgJ3bTUrP6EtpVdGLfsVRMw9ZPIo`): one tab per month
+  (October–December 2026), columns Date / Project / Hours / Total, Total =
+  Hours × $20, sum row at the bottom. Private; Ryan shares it with her.
+  The earlier plain tracker `1gdxDyJqwCpnHvxFTxga5I1FopApV8U5zyCED-YnNoIk`
+  is superseded (not trashed; ask Ryan first). No Sheets editor connector
+  in these sessions, so sheets are built as .xlsx with openpyxl and uploaded.
 - **Two-step process (Ryan, 2026-09-25):** she first signs a **1-page
   Contractor Offer** (terms only), then gets the long-form agreement.
   - Offer Doc (1 page, current): `1_zoBk8ijLsLIN0qW4RxGiWEy4D7Pq7TbLf3yx_3OzOQ`,
