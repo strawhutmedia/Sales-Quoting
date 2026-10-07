@@ -205,6 +205,34 @@ Network** YouTube channel (`@radiodramanetwork`). Karen (StardustBlue PR,
 
 ---
 
+### Pia Mehta (via Denyse Rabbat) — added 2026-10-07
+
+Pia Mehta is the client and the budget holder. Denyse Rabbat
+(`denyserabbat@gmail.com`, (310) 739-5036) works for her and is our day-to-day
+contact. Note the spelling: **Denyse**, not Denise. Pia has **15 episodes
+already recorded** (Drive folder "Straw Hat Media - Pia"
+`11OpWM6fLk_ezhyv6_qlOIVb0fipOlLot`). The show may be called "Well Heeled"
+(not confirmed).
+
+- **Post-production only:** $2,450/month, up to 4 finished episodes a month,
+  **no rollover**. The scope is full edits with 2 rounds of notes, cover art
+  and motion graphics, clips with captions for every episode, and publishing
+  whenever she's ready.
+- **Term:** Oct 1, 2026 → Jan 31, 2027 (4 months), then month-to-month from
+  Feb 1, 2027 on 30 days' notice. The production contract has to be
+  renegotiated by Dec 31, 2026, or sooner if she wants to shoot. After 15
+  episodes there's no footage left. Payment by card or ACH.
+- Agreement Doc (copied from the DWZ agreement and edited in place with the
+  Google Docs connector): `1z1RX47zHQfFgI1LVmbLoCtRAs86X1ADhWzm2uEgH5sk`.
+  Pia signs as an individual. **Her mailing address is still blank.** Ryan
+  sends the agreement himself.
+- Editing an existing Doc now works: `copy_file` the source, `read_doc` for
+  the indices, then `update_doc` (bottom-up index edits followed by
+  `replaceAllText`, guarded with `requiredRevisionId`). Use this instead of
+  the base64 .docx paste whenever a comparable Doc already exists.
+- ⚠️ The DWZ agreement's opening line has a typo ("Oct 1st 2026 and March
+  31st 2026"). It's fixed in Pia's copy but not in DWZ's.
+
 ## Contractor agreements (not client-facing sales docs, but they live here too)
 
 ### Sydney Fuller — Producing Consultant / Jr. Producer — added 2026-09-25
