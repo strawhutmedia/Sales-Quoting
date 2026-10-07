@@ -222,6 +222,10 @@ already recorded** (Drive folder "Straw Hat Media - Pia"
   Feb 1, 2027 on 30 days' notice. The production contract has to be
   renegotiated by Dec 31, 2026, or sooner if she wants to shoot. After 15
   episodes there's no footage left. Payment by card or ACH.
+- **Proposal first (Ryan, 2026-10-07):** a 1–2 page proposal goes out before
+  the agreement. Doc `1opmgKZAv7JEMIJ2VBnkqOYLtqDt_4Lv7362O-qmOWvw`, copied
+  from Karen's If You Please proposal (house style) and edited in place.
+  Prepared for Pia Mehta / Denyse Rabbat, with a signature block for Pia.
 - Agreement Doc (copied from the DWZ agreement and edited in place with the
   Google Docs connector): `1z1RX47zHQfFgI1LVmbLoCtRAs86X1ADhWzm2uEgH5sk`.
   Pia signs as an individual. **Her mailing address is still blank.** Ryan
