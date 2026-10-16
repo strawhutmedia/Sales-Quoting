@@ -248,13 +248,16 @@ monetization. His concept and niche aren't recorded anywhere.
 
 - Proposal Doc `1T0Z4XkolRx2-1a6IWRYTl7EN8tEYqw1Rx711yq1L6L8` (2 pages,
   copied from Pia's proposal). It answers his four questions in order.
-  **Launch Season: Essential $2,450/mo × 3 months = $7,350 for development,
-  a trailer and 5 episodes (≈$1,470/episode).** After launch, $2,450/mo for
-  up to 2 episodes a month, or Premium $4,350. He records remotely and
-  invites his own guests. No rev-share or co-production is offered, and
-  there are no outcome promises.
-- The launch-season structure is Claude's proposal and **Ryan hasn't
-  approved it yet.**
+  **Structure (Ryan, 2026-10-16): $2,450/mo. Month 1 is preparation and
+  strategy (branding, cover art, original music, promo assets) with nothing
+  released. Releasing starts in month 2, at 2 or 4 episodes a month
+  (≈$1,225 or ≈$612.50 per episode).** The Premium $4,350 studio upgrade is
+  listed as an option. He records remotely and invites his own guests. No
+  rev-share or co-production, and no outcome promises. No term length is set.
+- **Nobody recorded what Ryan pitched on the call.** There are no notes,
+  transcript or sent email. The only figure on file is the $2,000/mo
+  "full production" on the /booked qualifier and in the leads@ follow-up
+  draft. Ryan's per-episode math assumes $2,450.
 
 ## Contractor agreements (not client-facing sales docs, but they live here too)
 
