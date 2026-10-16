@@ -211,8 +211,8 @@ Pia Mehta is the client and the budget holder. Denyse Rabbat
 (`denyserabbat@gmail.com`, (310) 739-5036) works for her and is our day-to-day
 contact. Note the spelling: **Denyse**, not Denise. Pia has **15 episodes
 already recorded** (Drive folder "Straw Hat Media - Pia"
-`11OpWM6fLk_ezhyv6_qlOIVb0fipOlLot`). The show may be called "Well Heeled"
-(not confirmed).
+`11OpWM6fLk_ezhyv6_qlOIVb0fipOlLot`). The show is "Well Heeled" (Ryan put it on the
+proposal's title line himself).
 
 - **Post-production only:** $2,450/month, up to 4 finished episodes a month,
   **no rollover**. The scope is full edits with 2 rounds of notes, cover art
@@ -236,6 +236,25 @@ already recorded** (Drive folder "Straw Hat Media - Pia"
   the base64 .docx paste whenever a comparable Doc already exists.
 - ⚠️ The DWZ agreement's opening line has a typo ("Oct 1st 2026 and March
   31st 2026"). It's fixed in Pia's copy but not in DWZ's.
+
+### Duke Smith — independent creator — added 2026-10-16
+
+`dvegasmith@yahoo.com`. Early-stage, entertainment show, no podcast yet.
+Discovery call was Oct 7. When he booked he said he was "not yet" ready for
+$2,000/mo, and on the call he floated co-production / shared risk. On Oct 15
+he emailed asking for a plan for his first 3–5 episodes covering format, what
+the per-episode cost includes, who does what, and the launch budget plus
+monetization. His concept and niche aren't recorded anywhere.
+
+- Proposal Doc `1T0Z4XkolRx2-1a6IWRYTl7EN8tEYqw1Rx711yq1L6L8` (2 pages,
+  copied from Pia's proposal). It answers his four questions in order.
+  **Launch Season: Essential $2,450/mo × 3 months = $7,350 for development,
+  a trailer and 5 episodes (≈$1,470/episode).** After launch, $2,450/mo for
+  up to 2 episodes a month, or Premium $4,350. He records remotely and
+  invites his own guests. No rev-share or co-production is offered, and
+  there are no outcome promises.
+- The launch-season structure is Claude's proposal and **Ryan hasn't
+  approved it yet.**
 
 ## Contractor agreements (not client-facing sales docs, but they live here too)
 
